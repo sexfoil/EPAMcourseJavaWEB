@@ -1,4 +1,4 @@
-package Models.Entity.Comparators;
+package Utility.Comparators;
 
 import Models.Entity.Toy;
 

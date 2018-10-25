@@ -5,23 +5,25 @@ import Models.Entity.Interfaces.MakeSounds;
 public abstract class Soft extends Toy implements MakeSounds {
 
     private String sex;
-    private int scale;
+    private boolean isSpeak;
 
     public Soft() {
     }
 
-    public Soft(String color, String material, String producer,
-                double price, double weight, String sex, int scale) {
-        super(color, material, producer, price, weight);
+    public Soft(String name, String mainColor, String material,
+                String origin, double price, int[] ageDelta,
+                String sex, boolean isSpeak) {
+        super(name, mainColor, material, origin, price, ageDelta);
+        setType(getClass().getSimpleName());
         this.sex = sex;
-        this.scale = scale;
+        this.isSpeak = isSpeak;
     }
 
     @Override
     public String toString() {
         return super.toString() +
-                String.format(", sex=%-5s", sex) +
-                String.format(", scale=1:%-2d", scale);
+                String.format("sound:%-3s", (isSpeak ? "yes" : "no")) +
+                String.format("sex:%-10s ", sex);
     }
 
     public String getSex() {
@@ -32,11 +34,11 @@ public abstract class Soft extends Toy implements MakeSounds {
         this.sex = sex;
     }
 
-    public int getScale() {
-        return scale;
+    public boolean isSpeak() {
+        return isSpeak;
     }
 
-    public void setScale(int scale) {
-        this.scale = scale;
+    public void setSpeak(boolean speak) {
+        isSpeak = speak;
     }
 }

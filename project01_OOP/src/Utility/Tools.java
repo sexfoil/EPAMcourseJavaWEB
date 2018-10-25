@@ -1,17 +1,16 @@
 package Utility;
 
 import Models.Entity.Toy;
-import Models.ToysSet;
+import Models.PlayRoom;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Comparator;
 
 public class Tools<T extends Toy> {
 
-    private ToysSet<T> model;
+    private PlayRoom<T> model;
 
-    public Tools(ToysSet model) {
+    public Tools(PlayRoom model) {
         this.model = model;
     }
 
@@ -45,5 +44,9 @@ public class Tools<T extends Toy> {
             sum += item.getPrice();
         }
         return sum;
+    }
+
+    public void setToysInPlayRoom(double budget) {
+
     }
 }

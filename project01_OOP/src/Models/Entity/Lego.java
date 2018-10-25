@@ -4,17 +4,16 @@ public class Lego extends Kit {
 
     private String theme;
 
-    public Lego(String color, String material, String producer,
-                double price, double weight, int amountOfParts, int minAge, int maxAge,
+    public Lego(String name, String mainColor, String material, String origin,
+                double price, int[] ageDelta, int amountOfParts,
                 String theme) {
-        super(color, material, producer, price, weight, amountOfParts, minAge, maxAge);
+        super(name, mainColor, material, origin, price, ageDelta, amountOfParts);
         this.theme = theme;
     }
 
     @Override
     public String toString() {
-        return super.toString() +
-                ", theme='" + theme + '\'';
+        return super.toString() + String.format("theme:%-15s" + theme);
     }
 
     public String getTheme() {

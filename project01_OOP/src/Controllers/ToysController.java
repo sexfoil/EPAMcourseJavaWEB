@@ -1,11 +1,11 @@
 package Controllers;
 
-import Models.Entity.Comparators.MaterialComparator;
-import Models.Entity.Comparators.PriceComparator;
-import Models.Entity.Comparators.TypeComparator;
-import Models.Entity.Comparators.WeightComparator;
+import Utility.Comparators.MaterialComparator;
+import Utility.Comparators.PriceComparator;
+import Utility.Comparators.TypeComparator;
+import Utility.Comparators.NameComparator;
 import Models.Entity.Toy;
-import Models.ToysSet;
+import Models.PlayRoom;
 import Utility.Tools;
 import Utility.UserInterface;
 import Views.ToysView;
@@ -15,18 +15,18 @@ import java.util.Arrays;
 
 public class ToysController<T extends Toy> {
 
-    private ToysSet<T> model;
+    private PlayRoom<T> model;
     private ToysView<T> view;
-    private Tools tools;
+    private Tools<T> tools;
 
     public ToysController() {
         init();
     }
 
     private void init() {
-        model = new ToysSet<>();
+        model = new PlayRoom<>();
         view = new ToysView<>();
-        tools = new Tools(model);
+        tools = new Tools<>(model);
     }
 
     public void run() {
@@ -57,7 +57,7 @@ public class ToysController<T extends Toy> {
                                 resultSet = tools.sortToys(new PriceComparator());
                                 break;
                             case "weight":
-                                resultSet = tools.sortToys(new WeightComparator());
+                                resultSet = tools.sortToys(new NameComparator());
                                 break;
                             case "material":
                                 resultSet = tools.sortToys(new MaterialComparator());

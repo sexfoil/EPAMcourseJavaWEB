@@ -4,35 +4,26 @@ import Models.Entity.Interfaces.MakeSounds;
 
 public abstract class Car extends Toy implements MakeSounds {
 
-    private int scale;
     private boolean isMakeSound;
-    private String model;
+    private String kind;
 
     public Car() {
     }
 
-    public Car(String color, String material, String producer,
-               double price, double weight, int scale, boolean isMakeSound, String model) {
-        super(color, material, producer, price, weight);
-        this.scale = scale;
+    public Car(String name, String mainColor, String material,
+               String origin, double price, int[] ageDelta,
+               boolean isMakeSound, String kind) {
+        super(name, mainColor, material, origin, price, ageDelta);
+        setType(getClass().getSimpleName());
         this.isMakeSound = isMakeSound;
-        this.model = model;
+        this.kind = kind;
     }
 
     @Override
     public String toString() {
         return super.toString() +
-                String.format(", scale=1:%-3d", scale) +
-                String.format(", klaxon=%-3s", (isMakeSound ? "YES" : "NO")) +
-                String.format(", model=%s", model);
-    }
-
-    public int getScale() {
-        return scale;
-    }
-
-    public void setScale(int scale) {
-        this.scale = scale;
+                String.format("sound:%-3s", (isMakeSound ? "yes" : "no")) +
+                String.format("kind:%-8s ", kind);
     }
 
     public boolean isMakeSound() {
@@ -43,11 +34,11 @@ public abstract class Car extends Toy implements MakeSounds {
         isMakeSound = makeSound;
     }
 
-    public String getModel() {
-        return model;
+    public String getKind() {
+        return kind;
     }
 
-    public void setModel(String model) {
-        this.model = model;
+    public void setKind(String kind) {
+        this.kind = kind;
     }
 }

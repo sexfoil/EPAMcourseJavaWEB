@@ -4,10 +4,10 @@ public class Ivan extends Doll {
 
     private String region;
 
-    public Ivan(String color, String material, String producer,
-                double price, double weight, String sex, boolean isSpeak,
+    public Ivan(String name, String mainColor, String material, String origin,
+                double price, int[] ageDelta, String sex, boolean isSpeak,
                 String region) {
-        super(color, material, producer, price, weight, sex, isSpeak);
+        super(name, mainColor, material, origin, price, ageDelta, sex, isSpeak);
         this.region = region;
     }
 
@@ -18,8 +18,7 @@ public class Ivan extends Doll {
 
     @Override
     public String toString() {
-        return super.toString() +
-                ", region='" + region + '\'';
+        return super.toString() + String.format("region:%-14s", region);
     }
 
     public String getRegion() {

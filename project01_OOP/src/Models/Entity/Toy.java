@@ -1,34 +1,36 @@
 package Models.Entity;
 
+import java.util.Arrays;
+
 public abstract class Toy {
     private String type;
-    private String color;
+    private String name;
+    private String mainColor;
     private String material;
-    private String producer;
+    private String origin;
     private double price;
-    private double weight;
+    private int[] ageDelta;
 
     public Toy() {
     }
 
-    public Toy(String color, String material, String producer,
-               double price, double weight) {
-        this.type = this.getClass().getSimpleName();
-        this.color = color;
+    public Toy(String name, String mainColor, String material, String origin, double price, int[] ageDelta) {
+        this.type = "Toy";
+        this.name = name;
+        this.mainColor = mainColor;
         this.material = material;
-        this.producer = producer;
+        this.origin = origin;
         this.price = price;
-        this.weight = weight;
+        this.ageDelta = ageDelta;
     }
 
     @Override
     public String toString() {
-        return String.format("type=%-10s", type) +
-                String.format(" color=%-7s", color) +
-                String.format(" material=%-10s", material) +
-                String.format(" producer=%-3s", producer) +
-                String.format(" price=%-10.2f", price) +
-                String.format(" weight=%-10.2f", weight);
+        StringBuilder toyInfo = new StringBuilder(String.format("toy:%-8s ", name));
+        toyInfo.append(String.format("type:%-5s price:$%-6.2f madden:%-3s ", type, price, origin)).
+                append(String.format("material:%-8s color=%-7s ", material, mainColor)).
+                append(String.format("age:[%2d-%-2d] ", ageDelta[0], ageDelta[1]));
+        return toyInfo.toString();
     }
 
     @Override
@@ -39,29 +41,28 @@ public abstract class Toy {
         Toy toy = (Toy) o;
 
         if (Double.compare(toy.price, price) != 0) return false;
-        if (Double.compare(toy.weight, weight) != 0) return false;
-        if (type != null ? !type.equals(toy.type) : toy.type != null) return false;
-        if (color != null ? !color.equals(toy.color) : toy.color != null) return false;
+        if (!type.equals(toy.type)) return false;
+        if (name != null ? !name.equals(toy.name) : toy.name != null) return false;
+        if (mainColor != null ? !mainColor.equals(toy.mainColor) : toy.mainColor != null) return false;
         if (material != null ? !material.equals(toy.material) : toy.material != null) return false;
-        return producer != null ? producer.equals(toy.producer) : toy.producer == null;
+        if (origin != null ? !origin.equals(toy.origin) : toy.origin != null) return false;
+        return Arrays.equals(ageDelta, toy.ageDelta);
     }
 
     @Override
     public int hashCode() {
         int result;
         long temp;
-        result = 17;
-        result = 31 * result + (type != null ? type.hashCode() : 0);
-        result = 31 * result + (color != null ? color.hashCode() : 0);
+        result = type.hashCode();
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (mainColor != null ? mainColor.hashCode() : 0);
         result = 31 * result + (material != null ? material.hashCode() : 0);
-        result = 31 * result + (producer != null ? producer.hashCode() : 0);
+        result = 31 * result + (origin != null ? origin.hashCode() : 0);
         temp = Double.doubleToLongBits(price);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(weight);
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + Arrays.hashCode(ageDelta);
         return result;
     }
-
 
     public String getType() {
         return type;
@@ -71,12 +72,20 @@ public abstract class Toy {
         this.type = type;
     }
 
-    public String getColor() {
-        return color;
+    public String getName() {
+        return name;
     }
 
-    public void setColor(String color) {
-        this.color = color;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getMainColor() {
+        return mainColor;
+    }
+
+    public void setMainColor(String mainColor) {
+        this.mainColor = mainColor;
     }
 
     public String getMaterial() {
@@ -87,12 +96,12 @@ public abstract class Toy {
         this.material = material;
     }
 
-    public String getProducer() {
-        return producer;
+    public String getOrigin() {
+        return origin;
     }
 
-    public void setProducer(String producer) {
-        this.producer = producer;
+    public void setOrigin(String origin) {
+        this.origin = origin;
     }
 
     public double getPrice() {
@@ -103,11 +112,11 @@ public abstract class Toy {
         this.price = price;
     }
 
-    public double getWeight() {
-        return weight;
+    public int[] getAgeDelta() {
+        return ageDelta;
     }
 
-    public void setWeight(double weight) {
-        this.weight = weight;
+    public void setAgeDelta(int[] ageDelta) {
+        this.ageDelta = ageDelta;
     }
 }

@@ -1,8 +1,8 @@
 package Models.Entity;
 
-public class Tavria extends Car {
+public class Cat extends Soft {
     @Override
     public void makeSound() {
-        System.out.println("Bip-bip...");
+        System.out.println("Mur-meow...");
     }
 }
