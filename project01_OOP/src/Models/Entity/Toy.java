@@ -14,9 +14,9 @@ public abstract class Toy {
     public Toy() {
     }
 
-    public Toy(String name, String mainColor, String material, String origin, double price, int[] ageDelta) {
-        this.type = "Toy";
-        this.name = name;
+    public Toy(String mainColor, String material, String origin, double price, int[] ageDelta) {
+        this.type = getClass().getSuperclass().getSimpleName();
+        this.name = getClass().getSimpleName();
         this.mainColor = mainColor;
         this.material = material;
         this.origin = origin;
@@ -27,8 +27,8 @@ public abstract class Toy {
     @Override
     public String toString() {
         StringBuilder toyInfo = new StringBuilder(String.format("toy:%-8s ", name));
-        toyInfo.append(String.format("type:%-5s price:$%-6.2f madden:%-3s ", type, price, origin)).
-                append(String.format("material:%-8s color=%-7s ", material, mainColor)).
+        toyInfo.append(String.format("type:%-9s price:$%-6.2f madden:%-3s ", type, price, origin)).
+                append(String.format("material:%-7s color=%-5s ", material, mainColor)).
                 append(String.format("age:[%2d-%-2d] ", ageDelta[0], ageDelta[1]));
         return toyInfo.toString();
     }

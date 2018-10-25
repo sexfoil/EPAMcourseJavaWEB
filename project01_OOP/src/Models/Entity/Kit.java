@@ -8,17 +8,15 @@ public abstract class Kit extends Toy {
 
     }
 
-    public Kit(String name, String mainColor, String material,
-               String origin, double price, int[] ageDelta,
+    public Kit(String mainColor, String material, String origin, double price, int[] ageDelta,
                int amountOfParts) {
-        super(name, mainColor, material, origin, price, ageDelta);
-        setType(getClass().getSimpleName());
+        super(mainColor, material, origin, price, ageDelta);
         this.amountOfParts = amountOfParts;
     }
 
     @Override
     public String toString() {
-        return super.toString() + String.format("parts:%-3d", amountOfParts);
+        return super.toString() + String.format("parts:%-4d", amountOfParts);
     }
 
     public int getAmountOfParts() {

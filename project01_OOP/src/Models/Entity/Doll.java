@@ -10,11 +10,9 @@ public abstract class Doll extends Toy implements MakeSounds {
     public Doll() {
     }
 
-    public Doll(String name, String mainColor, String material,
-                String origin, double price, int[] ageDelta,
+    public Doll(String mainColor, String material, String origin, double price, int[] ageDelta,
                 String sex, boolean isSpeak) {
-        super(name, mainColor, material, origin, price, ageDelta);
-        setType(getClass().getSimpleName());
+        super(mainColor, material, origin, price, ageDelta);
         this.sex = sex;
         this.isSpeak = isSpeak;
     }
@@ -22,7 +20,7 @@ public abstract class Doll extends Toy implements MakeSounds {
     @Override
     public String toString() {
         return super.toString() +
-                String.format("sound:%-3s", (isSpeak ? "yes" : "no")) +
+                String.format("sound:%-4s", (isSpeak ? "yes" : "no")) +
                 String.format("sex:%-10s ", sex);
     }
 

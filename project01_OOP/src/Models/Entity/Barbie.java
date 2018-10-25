@@ -4,10 +4,10 @@ public class Barbie extends Doll {
 
     private String theme;
 
-    public Barbie(String name, String mainColor, String material, String origin,
+    public Barbie(String mainColor, String material, String origin,
                   double price, int[] ageDelta, String sex, boolean isSpeak,
                   String theme) {
-        super(name, mainColor, material, origin, price, ageDelta, sex, isSpeak);
+        super(mainColor, material, origin, price, ageDelta, sex, isSpeak);
         this.theme = theme;
     }
 
@@ -18,7 +18,7 @@ public class Barbie extends Doll {
 
     @Override
     public String toString() {
-        return super.toString() + String.format("theme:%-15s" + theme);
+        return super.toString() + String.format("theme:%-15s", theme);
     }
 
     public String getTheme() {

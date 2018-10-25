@@ -9,9 +9,11 @@ import java.util.Comparator;
 public class Tools<T extends Toy> {
 
     private PlayRoom<T> model;
+    private ToysCreator toysCreator;
 
     public Tools(PlayRoom model) {
         this.model = model;
+        toysCreator = new ToysCreator();
     }
 
     public ArrayList<T> selectToys(String[] params) {
@@ -47,6 +49,13 @@ public class Tools<T extends Toy> {
     }
 
     public void setToysInPlayRoom(double budget) {
-
+        double minPrice = ToysCreator.minPrice;
+        do {
+            Toy toy = toysCreator.createToy();
+            if (budget > toy.getPrice()) {
+                model.getToys().add((T) toy);
+                budget -= toy.getPrice();
+            }
+        } while (budget > minPrice);
     }
 }

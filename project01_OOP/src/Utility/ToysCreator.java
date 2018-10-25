@@ -2,53 +2,80 @@ package Utility;
 
 import Models.Entity.*;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Random;
 
-public class ToysCreator<T extends Toy> {
+public class ToysCreator {
 
-    private static final String[] colors = new String[] {"black", "white", "red", "green", "blue", "yellow", "brawn"};
-    private static final String[] buildings = new String[] {"bridge", "house", "garage", "castle", "stadium"};
-    private static final String[] themes = new String[] {"StarWars", "AngryBirds", "Ninja", "Weekend", "Picnic"};
+    private static final String[] colors = new String[]{"brown", "white", "black", "grey", "red", "green", "blue"};
+    private static final String[] buildings = new String[]{"bridge", "house", "garage", "castle", "stadium"};
+    private static final String[] themes = new String[]{"StarWars", "Police", "Ninja", "Weekend", "Picnic"};
+    private static final String[] sex = new String[]{"male", "female"};
     private static Random random = new Random();
+    public static double minPrice = 9.99;
 
 
-    public T createToy() {
-        T toy = null;
-//        for (int i = 0; i < 20; i++) {
-//            Toy item = null;
-//            int num = r.nextInt(100);
-//            String color = colors[num % 3];
-//            switch (r.nextInt(8)) {
-//                case 0:
-//                    item = new Barbie("black", "plastic", "USA", num*10.0, num/5.0, "female", true, "City");
-//                    break;
-//                case 1:
-//                    item = new Bear("white", "plush", "FR", num*5.0, num/4.0, "male", 10, "Polar");
-//                    break;
-//                case 2:
-//                    item = new Bunny(color, "plush", "UA", num*3.0, num/6.0, "female", 25);
-//                    break;
-//                case 3:
-//                    item = new Igroteco(color, "wood", "RUS", 12.35, num*2, num*10, (3+num%5), (8+num%5), buildings[num%3]);
-//                    break;
-//                case 4:
-//                    item = new Ivan("white", "wood", "RUS", num*2.0, num/5.0, "male", false, "Ural");
-//                    break;
-//                case 5:
-//                    item = new Lego(color, "plastic", "USA", 102.50, num*3, num*14, (2+num%5), (6+num%5), buildings[num%3]);
-//                    break;
-//                case 6:
-//                    item = new McLaren(color, "steel", "USA", num*100_000, num*100, 1, true, "F1");
-//                    break;
-//                case 7:
-//                    item = new Tavria(color, "steel", "UA", num*500, num*50, 1, true, "Slavuta");
-//                    break;
-//            }
-//            toys.add((T) item);
-//        }
-        return toy;
+    public Toy createToy() {
+        Toy item = null;
+        int num = random.nextInt(100);
+        int index;
+        String color;
+        double price;
+        int[] age;
+        switch (random.nextInt(4)) {
+            case 0:
+                index = random.nextInt(3);
+                color = colors[index + 4];
+                price = minPrice + 41.01 + index * 3;
+                age = new int[]{4, 9};
+                if (num % 3 == 0) {
+                    item = new Tavria(color, "steel", "UA", price, age, true, "sedan");
+                } else if (num % 3 == 1) {
+                    item = new Iveco(color, "steel", "EU", price, age, true, "truck");
+                } else {
+                    item = new McLaren(color, "steel", "USA", price, age, true, "sport", "F1");
+                }
+                break;
+            case 1:
+                index = random.nextInt(2);
+                color = colors[index];
+                price = minPrice + 25.01 + index * 10;
+                age = new int[]{4, 10};
+                if (random.nextBoolean()) {
+                    String theme = themes[index + 3];
+                    item = new Barbie(color, "plastic", "USA", price, age, "female", true, theme);
+                } else {
+                    item = new Ivan(color, "wood", "RUS", price, age, "male", false, "Ural");
+                }
+                break;
+            case 2:
+                index = random.nextInt(2);
+                color = colors[index];
+                price = minPrice + 40.01 + index * 20;
+                age = new int[]{7, 14};
+                if (index == 0) {
+                    item = new Igroteco(color, "wood", "RUS", price, age, num, buildings[num % 5]);
+                } else {
+                    item = new Lego(color, "plastic", "USA", price, age, num * 10, themes[num % 3]);
+                }
+                break;
+            case 3:
+                index = random.nextInt(4);
+                color = colors[index];
+                price = minPrice + index * 2;
+                age = new int[]{3, 15};
+                if (num % 4 == 0) {
+                    item = new Bear(color, "plush", "EU", price, age, sex[num % 2], true);
+                } else if (num % 4 == 1) {
+                    item = new Bunny(color, "plush", "UA", price, age, sex[num % 2], true);
+                } else if (num % 4 == 2) {
+                    item = new Cat(color, "plush", "UK", price, age, sex[num % 2], true);
+                } else {
+                    item = new Dog(color, "plush", "UK", price, age, sex[num % 2], true);
+                }
+                break;
+        }
+
+        return item;
     }
 
 

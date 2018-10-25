@@ -10,11 +10,9 @@ public abstract class Car extends Toy implements MakeSounds {
     public Car() {
     }
 
-    public Car(String name, String mainColor, String material,
-               String origin, double price, int[] ageDelta,
+    public Car(String mainColor, String material, String origin, double price, int[] ageDelta,
                boolean isMakeSound, String kind) {
-        super(name, mainColor, material, origin, price, ageDelta);
-        setType(getClass().getSimpleName());
+        super(mainColor, material, origin, price, ageDelta);
         this.isMakeSound = isMakeSound;
         this.kind = kind;
     }
@@ -22,8 +20,8 @@ public abstract class Car extends Toy implements MakeSounds {
     @Override
     public String toString() {
         return super.toString() +
-                String.format("sound:%-3s", (isMakeSound ? "yes" : "no")) +
-                String.format("kind:%-8s ", kind);
+                String.format("sound:%-4s", (isMakeSound ? "yes" : "no")) +
+                String.format("kind:%-9s ", kind);
     }
 
     public boolean isMakeSound() {

@@ -31,7 +31,8 @@ public class ToysController<T extends Toy> {
 
     public void run() {
 
-        view.printMessage("WELCOME TO TOYS ROOM!!!\n");
+        view.printMessage("WELCOME TO PLAYROOM!!!\n");
+        tools.setToysInPlayRoom(1000.0);
         application:
         while (true) {
             int command = UserInterface.inputCommand(view);

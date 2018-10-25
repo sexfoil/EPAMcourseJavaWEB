@@ -4,9 +4,9 @@ public class McLaren extends Car {
 
     private String model;
 
-    public McLaren(String name, String mainColor, String material, String origin,
+    public McLaren(String mainColor, String material, String origin,
                    double price, int[] ageDelta, boolean isMakeSound, String kind, String model) {
-        super(name, mainColor, material, origin, price, ageDelta, isMakeSound, kind);
+        super(mainColor, material, origin, price, ageDelta, isMakeSound, kind);
         this.model = model;
     }
 

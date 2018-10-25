@@ -4,10 +4,10 @@ public class Ivan extends Doll {
 
     private String region;
 
-    public Ivan(String name, String mainColor, String material, String origin,
+    public Ivan(String mainColor, String material, String origin,
                 double price, int[] ageDelta, String sex, boolean isSpeak,
                 String region) {
-        super(name, mainColor, material, origin, price, ageDelta, sex, isSpeak);
+        super(mainColor, material, origin, price, ageDelta, sex, isSpeak);
         this.region = region;
     }
 
