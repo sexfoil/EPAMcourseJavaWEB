@@ -2,18 +2,67 @@ package Models.Entity;
 
 import java.util.Arrays;
 
+/**
+ * Abstract class {@code Toy} is super class of toy's entity.
+ * All subclasses has fields and implement the methods of this class.
+ *
+ * @author Slava Poliakov
+ * @version 1.0
+ */
 public abstract class Toy {
+    /**
+     * Type of group of toy.
+     */
     private String type;
+
+    /**
+     * Name of toy.
+     */
     private String name;
+
+    /**
+     * Main color of toy instance.
+     */
     private String mainColor;
+
+    /**
+     * Name of toy's material.
+     */
     private String material;
+
+    /**
+     * Short country name of toy's producer.
+     */
     private String origin;
+
+    /**
+     * Base price of toy instance.
+     */
     private double price;
+
+    /**
+     * Edges of human age.
+     */
     private int[] ageDelta;
 
+
+    /**
+     * Sole default constructor.  (For invocation by subclass default constructors, typically
+     * implicit.)
+     */
     public Toy() {
     }
 
+    /**
+     * Sole constructor.  (For invocation by subclass constructors, typically
+     * implicit.)
+     *
+     * @param mainColor initial main color of toy
+     * @param material  initial material of toy
+     * @param origin    initial country of producer of toy
+     * @param price     initial price of toy
+     * @param ageDelta  initial age's edges for user of toy
+     */
     public Toy(String mainColor, String material, String origin, double price, int[] ageDelta) {
         this.type = getClass().getSuperclass().getSimpleName();
         this.name = getClass().getSimpleName();
@@ -24,6 +73,18 @@ public abstract class Toy {
         this.ageDelta = ageDelta;
     }
 
+
+    /**
+     * Returns a string representation of the toy. In general, the
+     * {@code toString} method returns a string that
+     * "textually represents" this toy.
+     * <p>
+     * The {@code toString} method for class {@code Toy}
+     * returns a string consisting of the name, type, price, producer's country
+     * material, color and edge of human's age of toy instance.
+     *
+     * @return a string representation of the toy.
+     */
     @Override
     public String toString() {
         StringBuilder toyInfo = new StringBuilder(String.format("toy:%-8s ", name));
@@ -33,6 +94,13 @@ public abstract class Toy {
         return toyInfo.toString();
     }
 
+    /**
+     * Indicates whether some other toy is "equal to" this one.
+     *
+     * @param o the reference object with which to compare.
+     * @return {@code true} if this object is the same as the obj
+     * argument; {@code false} otherwise.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -49,6 +117,11 @@ public abstract class Toy {
         return Arrays.equals(ageDelta, toy.ageDelta);
     }
 
+    /**
+     * Returns a hash code value for the toy.
+     *
+     * @return a hash code value for this object.
+     */
     @Override
     public int hashCode() {
         int result;
@@ -68,16 +141,8 @@ public abstract class Toy {
         return type;
     }
 
-    public void setType(String type) {
-        this.type = type;
-    }
-
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getMainColor() {

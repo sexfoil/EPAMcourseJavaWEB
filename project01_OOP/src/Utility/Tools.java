@@ -6,6 +6,12 @@ import Models.PlayRoom;
 import java.util.ArrayList;
 import java.util.Comparator;
 
+/**
+ * Service class {@code Tools} to interact with model.
+ *
+ * @author Slava Poliakov
+ * @version 1.0
+ */
 public class Tools<T extends Toy> {
 
     private PlayRoom<T> model;
@@ -20,11 +26,26 @@ public class Tools<T extends Toy> {
         ArrayList<T> result = new ArrayList<>();
         currentToy:
         for (T t : model.getToys()) {
+            boolean skip = true;
             for (String pair : params) {
                 String toy = t.toString();
-                System.out.println(pair);
-
-                if (!toy.contains(pair)) {
+                if (pair.startsWith("price")) {
+                    double userPrice = Double.parseDouble(pair.substring(6));
+                    switch (pair.charAt(5)) {
+                        case '>':
+                            skip = t.getPrice() < userPrice;
+                            break;
+                        case '<':
+                            skip = t.getPrice() > userPrice;
+                            break;
+                        case '=':
+                            skip = t.getPrice() != userPrice;
+                            break;
+                    }
+                } else {
+                    skip = !toy.contains(pair);
+                }
+                if (skip) {
                     continue currentToy;
                 }
             }

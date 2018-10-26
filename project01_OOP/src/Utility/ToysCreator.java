@@ -4,6 +4,12 @@ import Models.Entity.*;
 
 import java.util.Random;
 
+/**
+ * Service class {@code ToysCreator} to create random instance of toy.
+ *
+ * @author Slava Poliakov
+ * @version 1.0
+ */
 public class ToysCreator {
 
     private static final String[] colors = new String[]{"brown", "white", "black", "grey", "red", "green", "blue"};
@@ -27,9 +33,9 @@ public class ToysCreator {
                 color = colors[index + 4];
                 price = minPrice + 41.01 + index * 3;
                 age = new int[]{4, 9};
-                if (num % 3 == 0) {
+                if (index == 0) {
                     item = new Tavria(color, "steel", "UA", price, age, true, "sedan");
-                } else if (num % 3 == 1) {
+                } else if (index == 1) {
                     item = new Iveco(color, "steel", "EU", price, age, true, "truck");
                 } else {
                     item = new McLaren(color, "steel", "USA", price, age, true, "sport", "F1");

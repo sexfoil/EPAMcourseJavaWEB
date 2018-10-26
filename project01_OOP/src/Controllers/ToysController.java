@@ -1,9 +1,6 @@
 package Controllers;
 
-import Utility.Comparators.MaterialComparator;
-import Utility.Comparators.PriceComparator;
-import Utility.Comparators.TypeComparator;
-import Utility.Comparators.NameComparator;
+import Utility.Comparators.*;
 import Models.Entity.Toy;
 import Models.PlayRoom;
 import Utility.Tools;
@@ -13,6 +10,12 @@ import Views.ToysView;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * Parametrized class {@code ToysController} is controller in MVC application.
+ *
+ * @author Slava Poliakov
+ * @version 1.0
+ */
 public class ToysController<T extends Toy> {
 
     private PlayRoom<T> model;
@@ -30,9 +33,13 @@ public class ToysController<T extends Toy> {
     }
 
     public void run() {
-
         view.printMessage("WELCOME TO PLAYROOM!!!\n");
-        tools.setToysInPlayRoom(1000.0);
+
+        double playroomBudget = UserInterface.inputBudget(view);
+
+        tools.setToysInPlayRoom(playroomBudget);
+        view.printMessage(String.format("Playroom created accordance with your budget: $%.2f", playroomBudget));
+
         application:
         while (true) {
             int command = UserInterface.inputCommand(view);
@@ -42,26 +49,32 @@ public class ToysController<T extends Toy> {
                 case 1:
                     view.printMessage(ToysView.START_INFO + ":");
                     view.printToys(model.getToys());
-                    break ;
+                    break;
                 case 2:
                     view.printMessage(ToysView.SUM_OF_PRICES);
                     view.printMessage(String.format("$ %.2f", tools.calculatePrices()));
                     break;
                 case 3:
                     inputParams = UserInterface.inputParameter(view, ToysView.SORT_MENU);
-                    if (!inputParams[0].equals("back")){
-                        switch (inputParams[0]) {
+                    if (!inputParams[0].toLowerCase().equals("back")) {
+                        switch (inputParams[0].toLowerCase()) {
                             case "type":
                                 resultSet = tools.sortToys(new TypeComparator());
                                 break;
                             case "price":
                                 resultSet = tools.sortToys(new PriceComparator());
                                 break;
-                            case "weight":
+                            case "name":
                                 resultSet = tools.sortToys(new NameComparator());
                                 break;
                             case "material":
                                 resultSet = tools.sortToys(new MaterialComparator());
+                                break;
+                            case "age":
+                                resultSet = tools.sortToys(new AgeComparator());
+                                break;
+                            case "madden":
+                                resultSet = tools.sortToys(new OriginComparator());
                                 break;
                             default:
                                 view.printMessage("Unknown or wrong parameter to sorting...");
@@ -74,7 +87,7 @@ public class ToysController<T extends Toy> {
                     break;
                 case 4:
                     inputParams = UserInterface.inputParameter(view, ToysView.SELECT_MENU);
-                    if (!inputParams[0].equals("back")){
+                    if (!inputParams[0].toLowerCase().equals("back")) {
                         resultSet = tools.selectToys(inputParams);
                         if (resultSet.size() != 0) {
                             view.printMessage(ToysView.START_INFO + ToysView.SELECTED_BY + "'" + Arrays.toString(inputParams) + "':");

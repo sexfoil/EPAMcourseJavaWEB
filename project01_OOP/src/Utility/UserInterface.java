@@ -4,6 +4,12 @@ import Views.ToysView;
 
 import java.util.Scanner;
 
+/**
+ * Service class {@code UserInterface} to get user's inputs.
+ *
+ * @author Slava Poliakov
+ * @version 1.0
+ */
 public class UserInterface {
 
     private static Scanner scanner = new Scanner(System.in);
@@ -40,4 +46,18 @@ public class UserInterface {
         return inputsArray;
     }
 
+    public static double inputBudget(ToysView view) {
+        double value;
+        boolean isValid;
+
+        view.printMessage(ToysView.INPUT_BUDGET);
+        while (!(isValid = scanner.hasNextDouble()) || !((value = scanner.nextInt()) > 0 && value <= 10000.0)) {
+            view.printMessage(ToysView.WRONG_INPUT + ToysView.INPUT_BUDGET);
+            if (!isValid) {
+                scanner.next();
+            }
+        }
+        scanner.nextLine();
+        return value;
+    }
 }

@@ -5,16 +5,16 @@ import Models.Entity.Toy;
 import java.util.Comparator;
 
 /**
- * Comparator class {@code TypeComparator} to compare toys by type.
+ * Comparator class {@code OriginComparator} to compare toys by producer's country.
  * Implement {@code Comparator} interface.
  *
  * @author Slava Poliakov
  * @version 1.0
  * @see Comparator
  */
-public class TypeComparator implements Comparator<Toy> {
+public class OriginComparator implements Comparator<Toy> {
     @Override
     public int compare(Toy toy1, Toy toy2) {
-        return toy1.getType().compareTo(toy2.getType());
+        return toy1.getOrigin().compareTo(toy2.getOrigin());
     }
 }
