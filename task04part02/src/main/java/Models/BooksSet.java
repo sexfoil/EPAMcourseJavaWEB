@@ -2,10 +2,22 @@ package Models;
 
 import Models.Entity.Book;
 
-
+/**
+ * This class is the Model in MVC Pattern - represents containing set of books.
+ *
+ * @author Slava Poliakov
+ * @version 1.0
+ */
 public class BooksSet {
+    /**
+     * Set of books
+     */
     private Book[] books;
 
+
+    /**
+     * Constructs model of book's set and create books.
+     */
     public BooksSet() {
         setBooks(createBooksSet());
     }
@@ -29,10 +41,20 @@ public class BooksSet {
         return booksSet;
     }
 
+    /**
+     * Returns set of books.
+     *
+     * @return set of books
+     */
     public Book[] getBooks() {
         return books;
     }
 
+    /**
+     * Set books to array of books.
+     *
+     * @param books book's array
+     */
     public void setBooks(Book[] books) {
         this.books = books;
     }

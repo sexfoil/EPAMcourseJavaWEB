@@ -6,13 +6,34 @@ import UI.UserInterface;
 import Utility.Tools;
 import Views.BooksView;
 
-
+/**
+ * This class is the Controller in MVC Pattern - controls the data flow into {@code BooksSet}
+ * object and updates the {@code BooksView} whenever data changes.
+ *
+ * @author Slava Poliakov
+ * @version 1.0
+ */
 public class BooksController {
 
+    /**
+     * Books model
+     */
     private BooksSet model;
+
+    /**
+     * Books view
+     */
     private BooksView view;
+
+    /**
+     * Tools to controls the data flow
+     */
     private Tools tools;
 
+
+    /**
+     * Sole constructor. Constructs and initialized controller to controls the data flow.
+     */
     public BooksController () {
         init();
     }
@@ -23,6 +44,9 @@ public class BooksController {
         tools = new Tools(model);
     }
 
+    /**
+     * Starts work of controller.
+     */
     public void run() {
         view.printMessage( "WELCOME!!!\n");
 
