@@ -49,7 +49,7 @@ public class Ivan extends Doll {
      * <p>
      * The {@code toString} method for class {@code Ivan}
      * returns a string of superclass and consisting
-     * of the theme of Ivan instance.
+     * of the region of Ivan instance.
      *
      * @return a string representation of the Ivan.
      */
@@ -58,10 +58,20 @@ public class Ivan extends Doll {
         return super.toString() + String.format("region:%-14s", region);
     }
 
+    /**
+     * Returns region of Ivan doll.
+     *
+     * @return region of Ivan doll
+     */
     public String getRegion() {
         return region;
     }
 
+    /**
+     * Set region to doll.
+     *
+     * @param region region of doll
+     */
     public void setRegion(String region) {
         this.region = region;
     }

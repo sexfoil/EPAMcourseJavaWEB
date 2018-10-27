@@ -18,15 +18,13 @@ public abstract class Kit extends Toy {
 
 
     /**
-     * Sole default constructor.  (For invocation by subclass default constructors, typically
-     * implicit.)
+     * Default constructor.
      */
     public Kit() {
     }
 
     /**
-     * Sole constructor.  (For invocation by subclass constructors, typically
-     * implicit.)
+     * Constructor with parameters.  (For invocation by subclass constructors.)
      *
      * @param mainColor     initial main color of kit
      * @param material      initial material of kit
@@ -57,10 +55,20 @@ public abstract class Kit extends Toy {
         return super.toString() + String.format("parts:%-4d", amountOfParts);
     }
 
+    /**
+     * Returns amount of kit's parts.
+     *
+     * @return amount of kit's parts
+     */
     public int getAmountOfParts() {
         return amountOfParts;
     }
 
+    /**
+     * Set amount of parts to kit.
+     *
+     * @param amountOfParts amount of parts
+     */
     public void setAmountOfParts(int amountOfParts) {
         this.amountOfParts = amountOfParts;
     }

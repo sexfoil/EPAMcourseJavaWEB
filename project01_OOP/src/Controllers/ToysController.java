@@ -11,27 +11,49 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- * Parametrized class {@code ToysController} is controller in MVC application.
+ * This class is the Controller in MVC Pattern - controls the data flow into {@code PlayRoom<T extends Toy>}
+ * object and updates the {@code ToysView<T extends Toy>} whenever data changes.
  *
  * @author Slava Poliakov
  * @version 1.0
  */
 public class ToysController<T extends Toy> {
 
+    /**
+     * Model object.
+     */
     private PlayRoom<T> model;
+
+    /**
+     * View object.
+     */
     private ToysView<T> view;
+
+    /**
+     * Set of tools to controls the data flow.
+     */
     private Tools<T> tools;
 
+    /**
+     * Constructs a controller to controls the data flow.
+     */
     public ToysController() {
         init();
     }
 
+
+    /**
+     * Initializes model, view and tools objects.
+     */
     private void init() {
         model = new PlayRoom<>();
         view = new ToysView<>();
         tools = new Tools<>(model);
     }
 
+    /**
+     * Starts work of controller.
+     */
     public void run() {
         view.printMessage("WELCOME TO PLAYROOM!!!\n");
 

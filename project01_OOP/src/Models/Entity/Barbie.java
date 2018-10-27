@@ -59,10 +59,20 @@ public class Barbie extends Doll {
         return super.toString() + String.format("theme:%-15s", theme);
     }
 
+    /**
+     * Returns theme of Barbie closes.
+     *
+     * @return theme of Barbie closes
+     */
     public String getTheme() {
         return theme;
     }
 
+    /**
+     * Set theme of closes to Barbie.
+     *
+     * @param theme theme of closes
+     */
     public void setTheme(String theme) {
         this.theme = theme;
     }

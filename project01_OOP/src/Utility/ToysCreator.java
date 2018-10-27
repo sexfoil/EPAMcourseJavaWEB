@@ -5,21 +5,51 @@ import Models.Entity.*;
 import java.util.Random;
 
 /**
- * Service class {@code ToysCreator} to create random instance of toy.
+ * Service class to create random instance of toy.
+ * Uses class {@code Random} to generate different properties of toy created.
  *
  * @author Slava Poliakov
  * @version 1.0
+ * @see Random
  */
 public class ToysCreator {
 
+    /**
+     * Set of colors.
+     */
     private static final String[] colors = new String[]{"brown", "white", "black", "grey", "red", "green", "blue"};
+
+    /**
+     * Set of buildings.
+     */
     private static final String[] buildings = new String[]{"bridge", "house", "garage", "castle", "stadium"};
+
+    /**
+     * Set of themes.
+     */
     private static final String[] themes = new String[]{"StarWars", "Police", "Ninja", "Weekend", "Picnic"};
+
+    /**
+     * Set of sexes.
+     */
     private static final String[] sex = new String[]{"male", "female"};
+
+    /**
+     * Generator of random values.
+     */
     private static Random random = new Random();
+
+    /**
+     * Minimum value of toy's price
+     */
     public static double minPrice = 9.99;
 
 
+    /**
+     * Returns instance of toy random generated.
+     *
+     * @return instance of toy
+     */
     public Toy createToy() {
         Toy item = null;
         int num = random.nextInt(100);
@@ -83,6 +113,4 @@ public class ToysCreator {
 
         return item;
     }
-
-
 }

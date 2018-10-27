@@ -33,6 +33,6 @@ public class Cat extends Soft {
      */
     @Override
     public void makeSound() {
-        System.out.println("Mur-meow...");
+        System.out.println("Murr-meow...");
     }
 }

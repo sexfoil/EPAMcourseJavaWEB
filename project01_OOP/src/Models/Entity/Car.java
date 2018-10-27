@@ -15,7 +15,7 @@ import Models.Entity.Interfaces.MakeSounds;
 public abstract class Car extends Toy implements MakeSounds {
 
     /**
-     * Is this toy can make any sound.
+     * Ability of makes a sound.
      */
     private boolean isMakeSound;
 
@@ -26,14 +26,12 @@ public abstract class Car extends Toy implements MakeSounds {
 
 
     /**
-     * Sole default constructor.  (For invocation by subclass default constructors, typically
-     * implicit.)
+     * Default constructor.
      */
     public Car() {}
 
     /**
-     * Sole constructor.  (For invocation by subclass constructors, typically
-     * implicit.)
+     * Constructor with parameters.  (For invocation by subclass constructors.)
      *
      * @param mainColor initial main color of toy
      * @param material initial material of toy
@@ -68,18 +66,40 @@ public abstract class Car extends Toy implements MakeSounds {
                 String.format("kind:%-9s ", kind);
     }
 
+
+    /**
+     * Returns is car can make a sound.
+     *
+     * @return {@code true} if toy can make a sound;
+     *         otherwise returns {@code false}
+     */
     public boolean isMakeSound() {
         return isMakeSound;
     }
 
+    /**
+     * Set ability of make a sound.
+     *
+     * @param makeSound ability of make a sound
+     */
     public void setMakeSound(boolean makeSound) {
         isMakeSound = makeSound;
     }
 
+    /**
+     * Returns kind of car.
+     *
+     * @return kind of car
+     */
     public String getKind() {
         return kind;
     }
 
+    /**
+     * Set kind of car.
+     *
+     * @param kind kind of car
+     */
     public void setKind(String kind) {
         this.kind = kind;
     }

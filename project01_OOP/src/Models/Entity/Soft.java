@@ -19,21 +19,19 @@ public abstract class Soft extends Toy implements MakeSounds {
     private String sex;
 
     /**
-     * Is this soft toy can speak.
+     * Ability of speak.
      */
     private boolean isSpeak;
 
 
     /**
-     * Sole default constructor.  (For invocation by subclass default constructors, typically
-     * implicit.)
+     * Default constructor.
      */
     public Soft() {
     }
 
     /**
-     * Sole constructor.  (For invocation by subclass constructors, typically
-     * implicit.)
+     * Constructor with parameters.  (For invocation by subclass constructors.)
      *
      * @param mainColor initial main color of soft toy
      * @param material  initial material of soft toy
@@ -68,18 +66,39 @@ public abstract class Soft extends Toy implements MakeSounds {
                 String.format("sex:%-10s ", sex);
     }
 
+    /**
+     * Returns sex of doll.
+     *
+     * @return sex of doll
+     */
     public String getSex() {
         return sex;
     }
 
+    /**
+     * Set sex to doll.
+     *
+     * @param sex doll's sex
+     */
     public void setSex(String sex) {
         this.sex = sex;
     }
 
+    /**
+     * Returns is doll can speak.
+     *
+     * @return {@code true} if doll can speak;
+     *         otherwise returns {@code false}
+     */
     public boolean isSpeak() {
         return isSpeak;
     }
 
+    /**
+     * Set ability of speak.
+     *
+     * @param speak ability of speak
+     */
     public void setSpeak(boolean speak) {
         isSpeak = speak;
     }

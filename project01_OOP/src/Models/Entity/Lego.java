@@ -50,10 +50,20 @@ public class Lego extends Kit {
         return super.toString() + String.format("theme:%-15s", theme);
     }
 
+    /**
+     * Returns name of theme of Lego kit.
+     *
+     * @return name of theme
+     */
     public String getTheme() {
         return theme;
     }
 
+    /**
+     * Set theme to Lego kit.
+     *
+     * @param theme theme of kit
+     */
     public void setTheme(String theme) {
         this.theme = theme;
     }

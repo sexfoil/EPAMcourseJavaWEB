@@ -5,15 +5,28 @@ import Views.ToysView;
 import java.util.Scanner;
 
 /**
- * Service class {@code UserInterface} to get user's inputs.
+ * Service class to get user's inputs.
+ * Contains only static methods. Uses class {@code Scanner} to get input from user.
  *
  * @author Slava Poliakov
  * @version 1.0
+ * @see Scanner
  */
 public class UserInterface {
 
+    /**
+     * Scanner instance.
+     */
     private static Scanner scanner = new Scanner(System.in);
 
+
+    /**
+     * Returns {@code int} number of user choice.
+     *
+     * @param view instance of View to output interface dialog.
+     *
+     * @return number of user choice
+     */
     public static int inputCommand(ToysView view) {
 
         int value;
@@ -30,6 +43,14 @@ public class UserInterface {
         return value;
     }
 
+    /**
+     * Returns {@code int} number of user choice.
+     *
+     * @param view instance of View to output interface dialog.
+     * @param msg message to user.
+     *
+     * @return number of user choice
+     */
     public static String[] inputParameter(ToysView view, String msg) {
         view.printMessage(msg);
         String line = null;
@@ -46,6 +67,13 @@ public class UserInterface {
         return inputsArray;
     }
 
+    /**
+     * Returns {@code double} budget of playroom inputted by user.
+     *
+     * @param view instance of View to output interface dialog.
+     *
+     * @return budget of playroom
+     */
     public static double inputBudget(ToysView view) {
         double value;
         boolean isValid;

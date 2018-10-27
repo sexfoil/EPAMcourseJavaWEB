@@ -47,15 +47,13 @@ public abstract class Toy {
 
 
     /**
-     * Sole default constructor.  (For invocation by subclass default constructors, typically
-     * implicit.)
+     * Default constructor.
      */
     public Toy() {
     }
 
     /**
-     * Sole constructor.  (For invocation by subclass constructors, typically
-     * implicit.)
+     * Constructor with parameters.  (For invocation by subclass constructors.)
      *
      * @param mainColor initial main color of toy
      * @param material  initial material of toy
@@ -137,50 +135,110 @@ public abstract class Toy {
         return result;
     }
 
+    /**
+     * Returns type of toy.
+     *
+     * @return type of toy
+     */
     public String getType() {
         return type;
     }
 
+    /**
+     * Returns name of toy.
+     *
+     * @return name of toy
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Returns main color of toy.
+     *
+     * @return main color of toy
+     */
     public String getMainColor() {
         return mainColor;
     }
 
+    /**
+     * Set main color of toy.
+     *
+     * @param mainColor color of toy
+     */
     public void setMainColor(String mainColor) {
         this.mainColor = mainColor;
     }
 
+    /**
+     * Returns name of material of toy.
+     *
+     * @return name of material of toy
+     */
     public String getMaterial() {
         return material;
     }
 
+    /**
+     * Set material of toy.
+     *
+     * @param material name material of toy
+     */
     public void setMaterial(String material) {
         this.material = material;
     }
 
+    /**
+     * Returns name of producer's country of toy.
+     *
+     * @return name of producer's country of toy
+     */
     public String getOrigin() {
         return origin;
     }
 
+    /**
+     * Set name of country of producer of toy.
+     *
+     * @param origin name of country
+     */
     public void setOrigin(String origin) {
         this.origin = origin;
     }
 
+    /**
+     * Returns price of toy.
+     *
+     * @return price of toy
+     */
     public double getPrice() {
         return price;
     }
 
+    /**
+     * Set price of toy.
+     *
+     * @param price value of price
+     */
     public void setPrice(double price) {
         this.price = price;
     }
 
+    /**
+     * Returns delta ages.
+     *
+     * @return delta ages
+     */
     public int[] getAgeDelta() {
         return ageDelta;
     }
 
+    /**
+     * Set delta ages of toy's player.
+     *
+     * @param ageDelta array of ages
+     */
     public void setAgeDelta(int[] ageDelta) {
         this.ageDelta = ageDelta;
     }

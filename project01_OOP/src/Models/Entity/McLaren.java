@@ -41,7 +41,7 @@ public class McLaren extends Car {
      */
     @Override
     public void makeSound() {
-        System.out.println("Fa-fa-faaaaa...");
+        System.out.println("Fa-fa-fa-faaaaaa...");
     }
 
     /**
@@ -60,10 +60,20 @@ public class McLaren extends Car {
                 String.format("model:%-9s", model);
     }
 
+    /**
+     * Returns model of McLaren car.
+     *
+     * @return model of McLaren car
+     */
     public String getModel() {
         return model;
     }
 
+    /**
+     * Set model type to McLaren car.
+     *
+     * @param model model of McLaren
+     */
     public void setModel(String model) {
         this.model = model;
     }

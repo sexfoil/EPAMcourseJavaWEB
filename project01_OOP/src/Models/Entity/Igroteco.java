@@ -50,10 +50,20 @@ public class Igroteco extends Kit {
         return super.toString() + String.format("object:%-12s", building);
     }
 
+    /**
+     * Returns name of building of Igroteco kit.
+     *
+     * @return name of building
+     */
     public String getBuilding() {
         return building;
     }
 
+    /**
+     * Set building to Igroteco kit.
+     *
+     * @param building building of kit
+     */
     public void setBuilding(String building) {
         this.building = building;
     }
