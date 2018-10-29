@@ -13,7 +13,6 @@ public class UserInterface {
         int value;
         boolean isValid;
 
-        view.printMessage(ShopView.MAIN_MENU);
         while (!(isValid = scanner.hasNextInt()) || !((value = scanner.nextInt()) >= 0 && value <= maxCommands)) {
             view.printMessage(ShopView.WRONG_INPUT + ShopView.MAIN_MENU);
             if (!isValid) {

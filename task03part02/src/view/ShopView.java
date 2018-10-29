@@ -1,8 +1,8 @@
 package view;
 
+import model.ShopModel;
 import model.entity.Good;
 
-import java.util.ArrayList;
 
 public class ShopView<T> implements PrintInformation{
 
@@ -11,18 +11,22 @@ public class ShopView<T> implements PrintInformation{
         System.out.println(msg);
     }
 
-    public void printDepartments(ArrayList<T> resultSet) {
+    public void printDepartments(T[] resultSet) {
         System.out.println(TABLE_BORDER);
-        for (T item : resultSet) {
-            System.out.println(item);
+        for (int i = 0; i < resultSet.length; i++) {
+            System.out.println(resultSet[i] != null ?
+                    resultSet[i] :
+                    " Location '" + ShopModel.DEPARTMENT_LOCATIONS[i] + "' is empty");
         }
         System.out.println(TABLE_BORDER);
     }
 
-    public void printGoods(ArrayList<Good> resultSet) {
+    public void printGoods(Good[] resultSet) {
         System.out.println(TABLE_BORDER);
-        for (Good item : resultSet) {
-            System.out.println(item);
+        for (int i = 0; i < resultSet.length; i++) {
+            System.out.println(resultSet[i] != null ?
+                    resultSet[i] :
+                    " Empty slot for good.");
         }
         System.out.println(TABLE_BORDER);
     }

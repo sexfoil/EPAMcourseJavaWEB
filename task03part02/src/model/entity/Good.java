@@ -2,19 +2,21 @@ package model.entity;
 
 public class Good {
 
-    public static int ID = 0;
+    private static int CREATED_ID = 0;
+    private int id;
     private String name;
     private double price;
 
     public Good(String name, double price) {
-        ID++;
+        id = ++CREATED_ID;
         this.name = name;
         this.price = price;
+
     }
 
     @Override
     public String toString() {
-        return String.format("%10s(id=%-2d) : $%-5.2f", name, ID,  price);
+        return String.format(" %10s(id=%-2d) : $%-5.2f", name, id,  price);
     }
 
     @Override
@@ -36,6 +38,10 @@ public class Good {
         temp = Double.doubleToLongBits(price);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         return result;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getName() {
