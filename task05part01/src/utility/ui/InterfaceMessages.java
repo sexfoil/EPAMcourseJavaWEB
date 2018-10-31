@@ -2,29 +2,24 @@ package utility.ui;
 
 public interface InterfaceMessages {
 
-    String TABLE_BORDER = String.format("+%1$s+%1$s+-%1$s-+-%1$s-+-%1$s-+-%1$s-+", "------------------------------");
+    String TABLE_BORDER = String.format("+%1$.8s+%1$.25s+%1$.13s+%1$.23s-+-%1$s%1$s-+", "------------------------------");
 
     String MAIN_MENU = "\nMAIN MENU (select action):\n" +
-            "1 - show all departments;\n" +
-            "2 - sort departments;\n" +
-            "3 - select department;\n" +
-            "4 - create department;\n" +
-            "5 - delete department;\n" +
+            "1 - show all students;\n" +
+            "2 - add student;\n" +
             "0 - exit program.";
 
-    String DEPARTMENT_MENU = " department MENU (select action):\n" +
-            "1 - show goods in department;\n" +
-            "2 - sort goods by id;\n" +
-            "3 - sort goods by name;\n" +
-            "4 - sort goods by price;\n" +
-            "5 - add good;\n" +
-            "6 - remove good;\n" +
-            "7 - replace good to another department;\n" +
-            "0 - back to main menu.";
+    String STUDENTS_LIST = "\nList of students:";
 
-    String SHOP_INFO = "\nList of departments";
-    String DEPARTMENT_GOODS = "\nList of goods";
+    String FIRST_NAME_STR = "Input first name:";
+    String LAST_NAME_STR = "Input last name:";
+    String DATE_STR = "Input date of birth in format 'DD.MM.YYYY' :";
+    String PHONE_STR = "Input phone number in format '+XXX (XX) XXX-XX-XX' :";
+    String ADDRESS_STR = "Input address in format '<Street name> b.<building number>, ap.<apartment number>' :";
 
-    String EMPTY_INPUT = "\nEmpty input!!! Try again...\n";
-    String WRONG_INPUT = "\nWrong input!!! Try again...\n ";
+    String EMPTY_INPUT = "\nError! Empty data string inputted!\n";
+    String INVALID_INPUT = "\nInvalid format of data inputted!\n";
+    String WRONG_INPUT = "\nWrong input! Try again...\n";
+
+    void printMessage(String msg);
 }

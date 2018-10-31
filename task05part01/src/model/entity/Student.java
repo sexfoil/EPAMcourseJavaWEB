@@ -2,18 +2,22 @@ package model.entity;
 
 public class Student {
 
-    private static int ID = 0;
+    private static int UNIQUE_NUMBER = 0;
+    private final int id;
     private String firstName;
     private String lastName;
     private String dateOfBirth;
     private String phone;
     private String address;
 
+    {
+        id = ++UNIQUE_NUMBER;
+    }
+
     public Student() {
     }
 
     public Student(String firstName, String lastName, String dateOfBirth, String phone, String address) {
-        ID++;
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
@@ -23,8 +27,8 @@ public class Student {
 
     @Override
     public String toString() {
-        return String.format("[ID:%03d] %10s %-15s (%s) ph: %s add:",
-                ID, firstName, lastName, dateOfBirth, phone, address);
+        return String.format(" [ID:%03d] %10s %-15s (%s) ph: %s  address:%-30s",
+                id, firstName, lastName, dateOfBirth, phone, address);
     }
 
     @Override
@@ -51,8 +55,8 @@ public class Student {
         return result;
     }
 
-    public static int getID() {
-        return ID;
+    public int getID() {
+        return id;
     }
 
     public String getFirstName() {
