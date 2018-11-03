@@ -27,23 +27,4 @@ public class UserInterface{
         return value;
     }
 
-
-//    public static String inputData(String msg) {
-//        System.out.println(msg);
-//        String line = null;
-//
-//        do {
-//            if (line != null) {
-//                System.out.println(EMPTY_INPUT);
-//            }
-//            line = scanner.nextLine();
-//        } while (line.trim().length() == 0);
-//
-//        return line;
-//    }
-//
-//    private static void print(String msg) {
-//
-//    }
-
 }

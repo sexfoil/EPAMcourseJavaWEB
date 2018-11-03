@@ -9,8 +9,8 @@ public interface InterfaceMessages {
     String INPUT_MIN_VALUE = "Input MIN value ";
     String INPUT_MAX_VALUE = "Input MAX value ";
 
-    String INVALID_INPUT_VALUE = "\nInvalid value inputted!\n";
-    String WRONG_INPUT = "\nWrong input! Try again...\n";
+    String INVALID_INPUT_VALUE = "\nInvalid value inputted!";
+    String WRONG_INPUT = "\nWrong input! Try again...";
 
     void printMessage(String msg);
 
