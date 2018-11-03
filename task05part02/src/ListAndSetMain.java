@@ -1,5 +1,9 @@
+import controller.Controller;
+
 public class ListAndSetMain {
     public static void main(String[] args) {
-        System.out.println("Start working...");
+
+        new Controller().run();
+
     }
 }
