@@ -1,4 +1,4 @@
-public class MyEnum<E extends MyEnum<E>> implements Comparable<E> {
+public class MyEnum implements Comparable {
 
     private final String name;
 
@@ -13,59 +13,38 @@ public class MyEnum<E extends MyEnum<E>> implements Comparable<E> {
     }
 
 
-    protected MyEnum(String name, int ordinal) {
+    public MyEnum(String name, int ordinal) {
         this.name = name;
         this.ordinal = ordinal;
     }
 
+    @Override
     public String toString() {
         return name;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
-    public final boolean equals(Object other) {
-        return this==other;
+        MyEnum myEnum = (MyEnum) o;
+
+        if (ordinal != myEnum.ordinal) return false;
+        return name != null ? name.equals(myEnum.name) : myEnum.name == null;
     }
 
-
-    public final int hashCode() {
-        return super.hashCode();
+    @Override
+    public int hashCode() {
+        int result = 17;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + ordinal;
+        return result;
     }
 
-
-    protected final Object clone() throws CloneNotSupportedException {
-        throw new CloneNotSupportedException();
+    @Override
+    public int compareTo(Object obj) {
+        MyEnum other = (MyEnum) obj;
+        return this.ordinal - other.ordinal;
     }
-
-
-    public final int compareTo(E o) {
-        MyEnum<?> other = (MyEnum<?>)o;
-        MyEnum<E> self = this;
-        if (self.getClass() != other.getClass() && // optimization
-                self.getDeclaringClass() != other.getDeclaringClass())
-            throw new ClassCastException();
-        return self.ordinal - other.ordinal;
-    }
-
-
-    @SuppressWarnings("unchecked")
-    public final Class<E> getDeclaringClass() {
-        Class<?> clazz = getClass();
-        Class<?> zuper = clazz.getSuperclass();
-        return (zuper == Enum.class) ? (Class<E>)clazz : (Class<E>)zuper;
-    }
-
-//    public static <T extends MyEnum<T>> T valueOf(Class<T> enumType,
-//                                                String name) {
-//        T result = enumType.getNget(name);
-//        if (result != null)
-//            return result;
-//        if (name == null)
-//            throw new NullPointerException("Name is null");
-//        throw new IllegalArgumentException(
-//                "No enum constant " + enumType.getCanonicalName() + "." + name);
-//    }
-
-    protected final void finalize() { }
-
 }
