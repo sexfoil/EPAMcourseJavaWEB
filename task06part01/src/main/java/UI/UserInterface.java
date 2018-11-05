@@ -69,14 +69,11 @@ public class UserInterface {
      * Returns {@code String} user input from console.
      *
      * @param view instance of View to output interface dialog.
-     * @param searchingParam parameter for searching
+     * @param infoMessage information for showing to user
      * @return user input
      */
-    public static String inputName(BooksView view, String searchingParam) {
-
-        view.printMessage(searchingParam);
-        String data = scanner.nextLine();
-
-        return data;
+    public static String getUserInputString(BooksView view, String infoMessage) {
+        view.printMessage(infoMessage);
+        return scanner.nextLine();
     }
 }

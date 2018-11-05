@@ -6,6 +6,8 @@ import UI.UserInterface;
 import Utility.Tools;
 import Views.BooksView;
 
+import javax.swing.text.View;
+
 /**
  * This class is the Controller in MVC Pattern - controls the data flow into {@code BooksSet}
  * object and updates the {@code BooksView} whenever data changes.
@@ -41,7 +43,7 @@ public class BooksController {
     private void init() {
         model = new BooksSet();
         view = new BooksView();
-        tools = new Tools(model);
+        tools = new Tools(model, view);
     }
 
     /**
@@ -50,14 +52,19 @@ public class BooksController {
     public void run() {
         view.printMessage( "WELCOME!!!\n");
 
+        tools.loadDataToModel();
+
+        Book[] resultSet = null;
+
         application:
         while (true) {
+
             int command = UserInterface.inputCommand(view);
             String name;
-            Book[] resultSet;
+
             switch (command) {
                 case 1:
-                    name = UserInterface.inputName(view, BooksView.INPUT_AUTHOR);
+                    name = UserInterface.getUserInputString(view, BooksView.INPUT_AUTHOR);
                     resultSet = tools.searchByAuthor(name);
                     if (resultSet.length > 0) {
                         view.printMessage(BooksView.START_INFO + BooksView.BY_AUTHOR + name);
@@ -67,7 +74,7 @@ public class BooksController {
                     }
                     break ;
                 case 2:
-                    name = UserInterface.inputName(view, BooksView.INPUT_PUBLISHER);
+                    name = UserInterface.getUserInputString(view, BooksView.INPUT_PUBLISHER);
                     resultSet = tools.searchByPublisher(name);
                     if (resultSet.length > 0) {
                         view.printMessage(BooksView.START_INFO + BooksView.BY_PUBLISHER + name);
@@ -96,10 +103,14 @@ public class BooksController {
                     view.printBooks(model.getBooks());
                     break;
                 case 0:
-                    view.printMessage("\nSEE YOU AND HAVE A NICE DAY!!!");
+                    if (resultSet != null && resultSet.length > 0) {
+                        tools.saveDataToFile(resultSet);
+                    }
                     break application;
             }
         }
 
+        view.printMessage("\nSEE YOU AND HAVE A NICE DAY!!!");
     }
+
 }

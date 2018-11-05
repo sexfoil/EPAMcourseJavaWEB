@@ -27,6 +27,11 @@ public class BooksView {
             "0 - exit program.";
 
     /**
+     * String that represents message to user about data source
+     */
+    public static final String INPUT_PATH = "\nInput 'path and filename' to load data from file or empty string to load initial data:";
+
+    /**
      * String that represents begin of message about list
      */
     public static final String START_INFO = "\nList of books";
@@ -70,6 +75,12 @@ public class BooksView {
      * String that represents message to user about wrong input
      */
     public static final String WRONG_INPUT = "Wrong input. Try again...\n ";
+
+    /**
+     * String that represents message to user about saving of results
+     */
+    public static final String SAVE_RESULT = "\nInput 'path and filename' for saving results to file " +
+                                                "or empty string to exit without saving:\n ";
 
     /**
      * String that represents message to user about no result

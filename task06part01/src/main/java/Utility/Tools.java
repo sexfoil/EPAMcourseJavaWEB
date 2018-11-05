@@ -3,14 +3,18 @@ package Utility;
 import Models.BooksSet;
 import Models.Entity.Book;
 import Models.Entity.PublisherComparator;
+import UI.UserInterface;
+import Views.BooksView;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Service class to controls the data flow in model.
  *
  * @author Slava Poliakov
- * @version 1.0
+ * @version 2.0
  */
 public class Tools {
 
@@ -19,14 +23,26 @@ public class Tools {
      */
     private BooksSet model;
 
+    /**
+     * Books view
+     */
+    private BooksView view;
+
+    /**
+     * File manager
+     */
+    private FileManager fileManager;
+
 
     /**
      * Constructs tools instance to interact with model.
      *
      * @param model books set
      */
-    public Tools(BooksSet model) {
+    public Tools(BooksSet model, BooksView view) {
         this.model = model;
+        this.view = view;
+        fileManager = new FileManager(view);
     }
 
     /**
@@ -92,4 +108,74 @@ public class Tools {
         return sorted;
     }
 
+    /**
+     * Loads data to model from file
+     */
+    public void loadDataToModel() {
+        boolean isLoadFromFile = false;
+        while (!isLoadFromFile) {
+            String dataFilePath = UserInterface.getUserInputString(view, BooksView.INPUT_PATH).trim();
+            if (dataFilePath.length() == 0) {
+                model.createBooksSet();
+                view.printMessage( "Book's set was created from initial data...\n");
+                break;
+            }
+
+            List<String> booksData = fileManager.getDataFromTextFile(dataFilePath);
+            if (booksData != null) {
+                int size = booksData.size();
+                Book[] books = new Book[size];
+                for (int i = 0; i < size; i++) {
+                    String[] data = parseDataStringToArray(booksData.get(i));
+                    Book book = new Book(
+                            data[0], // name
+                            data[1], // author
+                            data[2], // publisher
+                            Integer.parseInt(data[3]), // year
+                            Integer.parseInt(data[4]), // pages
+                            Double.parseDouble(data[5]) //price
+                    );
+                    books[i] = book;
+                }
+                model.setBooks(books);
+                isLoadFromFile = true;
+            }
+        }
+    }
+
+    public void saveDataToFile(Book[] data) {
+        boolean isSave = false;
+        while (!isSave) {
+            String dataFilePath = UserInterface.getUserInputString(view, BooksView.SAVE_RESULT).trim();
+            if (dataFilePath.length() == 0) {
+                break;
+            }
+
+            List<String> booksData = new ArrayList<>();
+            for (Book book : data) {
+                StringBuilder bookStr = new StringBuilder();
+                bookStr.append("\"").append(book.getName()).append("\", ");
+                bookStr.append(book.getAuthor()).append(", ");
+                bookStr.append(book.getPublisher()).append(", ");
+                bookStr.append("y.").append(book.getYear()).append(", ");
+                bookStr.append("p.").append(book.getPages()).append(", ");
+                bookStr.append("$").append(book.getPrice()).append("\n");
+
+                booksData.add(bookStr.toString());
+            }
+
+            isSave = fileManager.saveDataToTextFile(dataFilePath, booksData);
+        }
+
+    }
+
+
+    private String[] parseDataStringToArray(String str) {
+        String[] array = str.split(", ");
+        array[0] = array[0].substring(1, array[0].length() - 1);
+        array[3] = array[3].substring(2);
+        array[4] = array[4].substring(2);
+        array[5] = array[5].substring(1); //, array[0].length() - 1);
+        return array;
+    }
 }

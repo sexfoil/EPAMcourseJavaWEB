@@ -3,18 +3,21 @@ import static org.junit.Assert.*;
 import Models.BooksSet;
 import Models.Entity.Book;
 import Utility.Tools;
+import Views.BooksView;
 import org.junit.Before;
 import org.junit.Test;
 
 
 public class TestBooksMVC {
     BooksSet model;
+    BooksView view;
     Tools tools;
 
     @Before
     public void initialized() {
         model = new BooksSet();
-        tools = new Tools(model);
+        view = new BooksView();
+        tools = new Tools(model, view);
         createTestData();
     }
 

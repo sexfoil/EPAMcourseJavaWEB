@@ -16,14 +16,17 @@ public class BooksSet {
 
 
     /**
-     * Constructs model of book's set and create books.
+     * Default constructor.
      */
     public BooksSet() {
-        setBooks(createBooksSet());
+        //setBooks(createBooksSet());
     }
 
-    private Book[] createBooksSet() {
-        Book[] booksSet = new Book[] {
+    /**
+     * Creates set of books by default
+     */
+    public void createBooksSet() {
+        books = new Book[] {
                 new Book("Thinking in Java", "B. Eckel", "Caravela", 2007, 1150, 999.99),
                 new Book("Dr. No", "I. Fleming", "Komubook", 1958, 122, 105.11),
                 new Book("To The Lighthouse", "V. Woolf", "New Time", 2000, 333, 50.00),
@@ -38,7 +41,6 @@ public class BooksSet {
                 new Book("Lolita", "V. Nabokov", "Discursus", 1993, 269, 21.60),
                 new Book("Anna Karenina", "L. Tolstoy", "Port-Royal", 1993, 524, 76.88)
         };
-        return booksSet;
     }
 
     /**
