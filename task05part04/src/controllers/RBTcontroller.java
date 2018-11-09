@@ -30,16 +30,15 @@ public class RBTcontroller {
                     number = Integer.parseInt(command[1]);
                     view.printMessage(model.add(number) ? ("Added " + number) : "This number already exists...");
                     break;
-                case "remove":
+                case "del":
                     number = Integer.parseInt(command[1]);
-                    view.printMessage("Data is valid.");
-                    model.remove(number);
+                    view.printMessage(model.remove(number) ? ("Deleted " + number) : "No such number...");
                     break;
                 case "example":
-                    for (int data : ExampleDataSet.SORTED_INT) {
+                    for (int data : ExampleDataSet.UNSORTED_INT) {
                         model.add(data);
                     }
-                    view.printMessage("Added numbers from array:\n" + Arrays.toString(ExampleDataSet.SORTED_INT));
+                    view.printMessage("Added numbers from array:\n" + Arrays.toString(ExampleDataSet.UNSORTED_INT));
                     break;
                 case "show":
                     view.printRedBlackTree(model);
@@ -47,7 +46,7 @@ public class RBTcontroller {
                 case "help":
                     view.printMessage("Commands:\n" +
                             "\tadd 'number'     - to add number in RBtree;\n" +
-                            "\tremove 'number'  - to remove number from RBtree;\n" +
+                            "\tdel 'number'     - to delete number from RBtree;\n" +
                             "\texample          - to add numbers from example array;\n" +
                             "\tshow             - to print current state of RBtree;\n" +
                             "\texit             - to exit program.\n");

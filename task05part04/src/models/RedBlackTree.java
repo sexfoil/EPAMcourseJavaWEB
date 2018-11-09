@@ -58,14 +58,53 @@ public class RedBlackTree {
     }
 
 
-    public void remove(int data) {
-        if (root != null && root.getChild_L() != null && root.getChild_R() != null && root.getData() == data) {
+    public boolean remove(int data) {
+        if (root == null) return false;
+        if (root.getChild_L() == null && root.getChild_R() == null && root.getData() == data) {
             root = null;
-            return;
+            return true;
         }
 
-        // remove node from tree...
-        System.out.println("removing...");
+        TreeNode node = findNode(data, root);
+
+        if (node == null) return false;
+
+        if (node.isRed()) {
+            TreeNode parent = node.getParent();
+            // THREE WAYS
+            if (node.getChild_L() != null && node.getChild_R() != null) {
+                // BOTH CHILDREN NOT NULL
+                System.out.println("NOT NULL BOTH");
+            } else if (node.getChild_L() == null && node.getChild_R() == null) {
+                // BOTH CHILDREN ARE NULL
+                boolean isNodeLeft = parent.getChild_L() == node;
+                if (isNodeLeft) {
+                    parent.setChild_L(null);
+                } else {
+                    parent.setChild_R(null);
+                }
+            } else {
+                // ONE CHILD NULL ANOTHER NOT
+            }
+        } else {
+            System.out.println("Removing black " + node.getData());
+        }
+
+        return true;
+    }
+
+    private TreeNode findNode(int data, TreeNode node) {
+        TreeNode found = null;
+        if (node != null) {
+            if (data < node.getData()) {
+                found = findNode(data, node.getChild_L());
+            } else if (data > node.getData() ) {
+                found = findNode(data, node.getChild_R());
+            } else {
+                found = node;
+            }
+        }
+        return found;
     }
 
 
