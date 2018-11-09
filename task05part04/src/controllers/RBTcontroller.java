@@ -1,9 +1,12 @@
 package controllers;
 
 import models.RedBlackTree;
+import utility.ExampleDataSet;
 import utility.Tools;
 import utility.UI.UserInterface;
 import views.RBTview;
+
+import java.util.Arrays;
 
 public class RBTcontroller {
 
@@ -20,22 +23,39 @@ public class RBTcontroller {
     public void runController() {
         application:
         while (true) {
-            String[] command = UserInterface.inputAction(view, "Input action:");
+            String[] command = UserInterface.inputAction(view, "Input action (input 'help' to usage guide):");
+            int number;
             switch (command[0]) {
                 case "add":
-                    int[] data = tools.getValidData(command);
-                    if (data[0] > 0) {
-                        view.printMessage("Data is valid.");
-                        model.add(data[1]);
+                    number = Integer.parseInt(command[1]);
+                    view.printMessage(model.add(number) ? ("Added " + number) : "This number already exists...");
+                    break;
+                case "remove":
+                    number = Integer.parseInt(command[1]);
+                    view.printMessage("Data is valid.");
+                    model.remove(number);
+                    break;
+                case "example":
+                    for (int data : ExampleDataSet.SORTED_INT) {
+                        model.add(data);
                     }
+                    view.printMessage("Added numbers from array:\n" + Arrays.toString(ExampleDataSet.SORTED_INT));
+                    break;
+                case "show":
+                    view.printRedBlackTree(model);
                     break;
                 case "help":
-                    view.printMessage("Print help message");
+                    view.printMessage("Commands:\n" +
+                            "\tadd 'number'     - to add number in RBtree;\n" +
+                            "\tremove 'number'  - to remove number from RBtree;\n" +
+                            "\texample          - to add numbers from example array;\n" +
+                            "\tshow             - to print current state of RBtree;\n" +
+                            "\texit             - to exit program.\n");
                     break;
                 case "exit":
                     break application;
-                    default:
-                        view.printMessage("Unknown command or invalid data. Try again please...");
+                default:
+                    view.printMessage("Unknown command or invalid data. Try again please...");
             }
         }
     }
