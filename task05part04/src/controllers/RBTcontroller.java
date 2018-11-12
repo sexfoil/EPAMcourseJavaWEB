@@ -32,7 +32,7 @@ public class RBTcontroller {
                     break;
                 case "del":
                     number = Integer.parseInt(command[1]);
-                    view.printMessage(model.remove(number) ? ("Deleted " + number) : "No such number...");
+                    view.printMessage(model.delete(number) ? ("Deleted " + number) : "No such number...");
                     break;
                 case "example":
                     for (int data : ExampleDataSet.UNSORTED_INT) {
