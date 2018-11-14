@@ -8,7 +8,7 @@ public class TextToolsModel {
     private List<String> textLines;
 
     public TextToolsModel() {
-        this(new ArrayList<>());
+        this(new ArrayList<String>());
     }
 
     public TextToolsModel(List<String> textLines) {
