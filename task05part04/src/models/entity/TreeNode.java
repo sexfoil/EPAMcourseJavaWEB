@@ -7,7 +7,6 @@ public class TreeNode {
     private TreeNode child_R;
     private int data;
     private TreeNode parent;
-    private int height;
 
     public TreeNode(int data) {
         this.data = data;
@@ -19,7 +18,6 @@ public class TreeNode {
         parent = null;
         child_L = null;
         child_R = null;
-        //height = 0;
     }
 
     public boolean isRed() {
@@ -52,14 +50,6 @@ public class TreeNode {
 
     public void setChild_R(TreeNode child_R) {
         this.child_R = child_R;
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
-    public void setHeight(int height) {
-        this.height = height;
     }
 
     public TreeNode getParent() {

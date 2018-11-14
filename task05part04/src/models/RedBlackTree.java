@@ -33,6 +33,15 @@ public class RedBlackTree {
     }
 
 
+    public boolean delete(int data) {
+        TreeNode node = findNode(data, root);
+        if (node != null) {
+            return removeNode(node);
+        }
+        return false;
+    }
+
+
     private boolean insertNode(TreeNode parent, TreeNode node) {
         boolean inserted = false;
         if (node.getData() < parent.getData()) {
@@ -56,27 +65,19 @@ public class RedBlackTree {
     }
 
 
-    public boolean delete(int data) {
-        TreeNode node = findNode(data, root);
-        if (node != null) {
-            return removeNode(node);
-        }
-        return false;
-    }
-
-
     private boolean removeNode(TreeNode node) {
         if (root.getChild_L() == null && root.getChild_R() == null) {
             root = null;
             return true;
         }
+        boolean isRoot = node == root;
 
         TreeNode parent = node.getParent();
-        boolean isNodeLeft = parent.getChild_L() == node;
+        boolean isNodeLeft = !isRoot && parent.getChild_L() == node;
 
         /*
          *  TWO CASES       +(1) NODE IS A LEAF OR HAS ONLY ONE CHILD
-         *                  -(2) NODE HAS TWO CHILDREN
+         *                  +(2) NODE HAS TWO CHILDREN
          */
         if (node.getChild_L() == null || node.getChild_R() == null) {
             /*
@@ -84,7 +85,7 @@ public class RedBlackTree {
              */
             TreeNode successor = node.getChild_L() != null ? node.getChild_L() : node.getChild_R();
 
-            if (parent == null) {
+            if (isRoot) {
                 root = successor;
                 root.setRed(false);
                 return true;
@@ -118,37 +119,38 @@ public class RedBlackTree {
              *  CASE (2) NODE HAS TWO CHILDREN
              */
 
-            TreeNode largestNode = findLargestInLeftSubtree(node);
+            TreeNode largestNode = findLargestInLeftSubtree(node.getChild_L());
 
-//            if (largestNode.isRed()) {
-//                /*
-//                 *  RED NODE
-//                 */
-//                if (largestNode == node) {
-//                    if (isNodeLeft) {
-//                        parent.setChild_L(null);
-//                    } else {
-//                        parent.setChild_R(null);
-//                    }
-//                } else {
-//                    TreeNode largestParent = largestNode.getParent();
-//                    boolean isLargestNodeLeft = largestParent.getChild_L() == largestNode;
-//
-//                    if (isLargestNodeLeft) {
-//                        largestParent.setChild_L(null);
-//                    } else {
-//                        largestParent.setChild_R(null);
-//                    }
-//
-//                }
-//            } else {
-//                /*
-//                 *  BLACK NODE
-//                 */
-//                System.out.println("Black...");
-//
-//            }
+            TreeNode largestParent = largestNode.getParent();
+            boolean isLargestNodeLeft = largestParent.getChild_L() == largestNode;
 
+            node.setData(largestNode.getData());
+
+            if (largestNode.getChild_L() == null) {
+                /*
+                 *  LARGEST NODE IS LEAF
+                 */
+                if (isLargestNodeLeft) {
+                    largestParent.setChild_L(null);
+                } else {
+                    largestParent.setChild_R(null);
+                }
+
+                if (!largestNode.isRed()) {
+                    makeSingleBlack(isLargestNodeLeft, largestParent);
+                }
+            } else {
+                /*
+                 *  LARGEST NODE HAS LEFT CHILD
+                 */
+                largestNode.getChild_L().setParent(largestParent);
+                largestNode.getChild_L().setRed(false);
+                if (isLargestNodeLeft) {
+                    largestParent.setChild_L(largestNode.getChild_L());
+                } else {
+                    largestParent.setChild_R(largestNode.getChild_L());
+                }
+            }
         }
 
         return true;
@@ -158,12 +160,10 @@ public class RedBlackTree {
     private void makeSingleBlack(boolean isNodeLeft, TreeNode parent) {
         if (parent == null) return;
 
-        TreeNode node, sibling;
+        TreeNode sibling;
         if (isNodeLeft) {
-            node = parent.getChild_L();
             sibling = parent.getChild_R();
         } else {
-            node = parent.getChild_R();
             sibling = parent.getChild_L();
         }
 
@@ -174,7 +174,7 @@ public class RedBlackTree {
          *                  +(2) SIBLING IS BLACK AND HAS TWO BLACK CHILDREN
          *                  +(3) SIBLING IS BLACK AND HAS AT LEAST ONE RED CHILD
          */
-        if (sibling != null && sibling.isRed()) {
+        if (/*sibling != null && */sibling.isRed()) {
             /*
              *  CASE (1) SIBLING IS RED
              */
@@ -189,7 +189,7 @@ public class RedBlackTree {
             sibling.setRed(false);
             makeSingleBlack(isNodeLeft, parent);
         } else {
-            if ((sibling.getChild_L() == null || !sibling.getChild_L().isRed()) &&
+            if ( (sibling.getChild_L() == null || !sibling.getChild_L().isRed()) &&
                     (sibling.getChild_R() == null || !sibling.getChild_R().isRed())) {
                 /*
                  *  CASE (2) SIBLING IS BLACK AND HAS TWO BLACK CHILDREN
@@ -225,8 +225,10 @@ public class RedBlackTree {
                     singleRotateRight(parent.getParent(), parent, sibling);
                     sibling.getChild_L().setRed(false);
                 }
-                parent.setRed(false);
-                sibling.setRed(sibling != root);
+                if (parent.isRed()) {
+                    parent.setRed(false);
+                    sibling.setRed(sibling != root);
+                }
             }
         }
 
@@ -251,10 +253,6 @@ public class RedBlackTree {
     private TreeNode findLargestInLeftSubtree(TreeNode node) {
         if (node.getChild_R() != null) {
             return findLargestInLeftSubtree(node.getChild_R());
-        } else {
-            if (node.getChild_L() != null) {
-                return findLargestInLeftSubtree(node.getChild_L());
-            }
         }
         return node;
     }
@@ -356,6 +354,9 @@ public class RedBlackTree {
         }
     }
 
+
+
+
     private void drawTree(TreeNode node, int step) {
         if (node != null) {
             String s = getTab(step) + node.getData() + (node.isRed() ? "-R" : "-B");
@@ -384,141 +385,3 @@ public class RedBlackTree {
         return treePicture;
     }
 }
-
-
-
-//        /**
-//         * COMMENT THIS
-//         */
-//        TreeNode parent = node.getParent();
-//        boolean isNodeLeft = parent.getChild_L() == node;
-//
-//        /*
-//         *  TWO WAYS        (1) NODE IS RED
-//         *                  (2) NODE IS BLACK
-//         */
-//        if (node.isRed()) {
-//            /*
-//             *  (1) NODE IS RED
-//             *
-//             *  TWO WAYS    (1.1)- BOTH CHILDREN NOT NULL
-//             *              (1.2)+ ONE CHILD IS NULL OR BOTH CHILDREN ARE NULL
-//             */
-//            if (node.getChild_L() != null && node.getChild_R() != null) {
-//                /*
-//                 *  (1.1) BOTH CHILDREN NOT NULL
-//                 */
-//                System.out.println("NOT NULL BOTH");
-//
-//            } else {
-//                /*
-//                 *  (1.2) ONE CHILD IS NULL OR BOTH CHILDREN ARE NULL
-//                 */
-//                TreeNode tail = node.getChild_L() == null ? node.getChild_R() : node.getChild_L();
-//                if (tail != null) {
-//                    tail.setParent(parent);
-//                }
-//                if (isNodeLeft) {
-//                    parent.setChild_L(tail);
-//                } else {
-//                    parent.setChild_R(tail);
-//                }
-//            }
-//        } else {
-//            /*
-//             *  (2) NODE IS BLACK
-//             *
-//             *  TWO WAYS    (2.1)- BOTH CHILDREN NOT NULL
-//             *              (2.2)- BOTH CHILDREN ARE NULL
-//             *              (2.3)+ ONE CHILD NOT NULL
-//             */
-//            if (node.getChild_L() != null && node.getChild_R() != null) {
-//                /*
-//                 *  (2.1)- BOTH CHILDREN NOT NULL
-//                 */
-//                System.out.println("NOT NULL BOTH");
-//
-//            } else if (node.getChild_L() == null && node.getChild_R() == null) {
-//                /*
-//                 *  (2.2)- BOTH CHILDREN ARE NULL
-//                 */
-//                TreeNode sibling;
-//                if (isNodeLeft) {
-//                    parent.setChild_L(null);
-//                    sibling = parent.getChild_R();
-//                } else {
-//                    parent.setChild_R(null);
-//                    sibling = parent.getChild_L();
-//                }
-//
-//                /*
-//                 * TWO WAYS     (2.2.1) SIBLING IS RED
-//                 *              (2.2.2) SIBLING IS BLACK
-//                 */
-//                if (sibling.isRed()) {
-//                    /*
-//                     *  (2.2.1) SIBLING IS RED
-//                     */
-//
-//                } else {
-//                    /*
-//                     *  (2.2.2) SIBLING IS BLACK
-//                     *
-//                     *  TWO WAYS     (2.2.2.1)- BOTH NEPHEWS ARE BLACK
-//                     *               (2.2.2.2)+ AT LEAST ONE NEPHEW IS RED
-//                     */
-//                    if ((sibling.getChild_L() == null || !sibling.getChild_L().isRed()) &&
-//                            (sibling.getChild_R() == null || !sibling.getChild_R().isRed())) {
-//                        /*
-//                         *  (2.2.2.1) BOTH NEPHEWS ARE BLACK
-//                         */
-//                        sibling.setRed(true);
-//                        if (parent.isRed()) {
-//                            parent.setRed(false);
-//                        } else {
-//                            removeNode(parent);
-//                        }
-//                    } else {
-//                        /*
-//                         *  (2.2.2.2) AT LEAST ONE NEPHEW IS RED
-//                         */
-////                        if (isNodeLeft) {
-////                            if (!sibling.getChild_R().isRed()) {
-////                                singleRotateRight(parent, sibling, sibling.getChild_L());
-////                                sibling = sibling.getParent();
-////                                sibling.setRed(false);
-////                                sibling.getChild_R().setRed(true);
-////                            }
-////                            singleRotateLeft(parent.getParent(), parent, sibling);
-////                            sibling.getChild_R().setRed(false);
-////                        } else {
-////                            if (!sibling.getChild_L().isRed()) {
-////                                singleRotateLeft(parent, sibling, sibling.getChild_R());
-////                                sibling = sibling.getParent();
-////                                sibling.setRed(false);
-////                                sibling.getChild_L().setRed(true);
-////                            }
-////                            singleRotateRight(parent.getParent(), parent, sibling);
-////                            sibling.getChild_L().setRed(false);
-////                        }
-////                        parent.setRed(false);
-////                        sibling.setRed(true);
-//                    }
-//                }
-//            } else {
-//                /*
-//                 *  (2.3) ONE CHILD IS NOT NULL (and it always is red)
-//                 */
-//                TreeNode tail = node.getChild_L() == null ? node.getChild_R() : node.getChild_L();
-//                if (isNodeLeft) {
-//                    parent.setChild_L(tail);
-//                } else {
-//                    parent.setChild_R(tail);
-//                }
-//                tail.setParent(parent);
-//                tail.setRed(false);
-//            }
-//        }
-//        /**
-//         * COMMENT THIS
-//         */
