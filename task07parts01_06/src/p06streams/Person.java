@@ -7,7 +7,7 @@ public class Person {
     private Sex sex;
 
     public Person() {
-        this("unknown", 0, Sex.MALE);
+        this("John", 0, Sex.MALE);
     }
 
     public Person(String name, int age, Sex sex) {

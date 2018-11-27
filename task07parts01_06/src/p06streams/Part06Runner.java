@@ -34,11 +34,17 @@ public class Part06Runner {
         System.out.println(UserInterface.BORDER);
 
         Person[] peoples = DataExamples.persons;
-        //Arrays.stream(peoples).filter()
+        Arrays.stream(peoples)
+                .filter(p -> p.getSex() == Sex.MALE && p.getAge() >= 18 && p.getAge() <= 55)
+                .forEach(System.out::println);
 
         System.out.println(UserInterface.BORDER);
 
-
+        double avg = Arrays.stream(peoples)
+                .filter(p -> p.getSex() == Sex.FEMALE)
+                .mapToDouble(Person::getAge)
+                .average().getAsDouble();
+        System.out.println("Females AVG age = " + avg);
 
         System.out.println(UserInterface.BORDER);
     }

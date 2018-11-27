@@ -1,5 +1,7 @@
 package Models.Entity;
 
+import java.io.Serializable;
+
 /**
  * This class represents entity of book.
  *
@@ -7,7 +9,7 @@ package Models.Entity;
  * @version 1.0
  *
  */
-public class Book {
+public class Book implements Serializable {
     /**
      * Name of book.
      */
