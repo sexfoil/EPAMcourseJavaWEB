@@ -16,9 +16,10 @@ public class MyOffice {
         st = db.getStatement();
         String query = "select * from employees;";
         ResultSet rs = st.executeQuery(query);
-        System.out.println();
+        System.out.println("DATABASE");
         while (rs.next()) {
             System.out.println(rs.getString(2) + " " + rs.getString(3));
+
         }
 
         db.closeStatement(st);
