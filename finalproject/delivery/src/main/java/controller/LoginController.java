@@ -34,7 +34,7 @@ public class LoginController extends HttpServlet {
             ServiceUser service = new ServiceUser();
 
             String login = req.getParameter("login");
-            User userExist = service.getUser(login != null ? login : "");
+            User userExist = login != null ? service.getUser(login) : null;
 
             if (userExist != null && req.getParameter("password").equals(userExist.getPassword())) {
                 user = userExist;

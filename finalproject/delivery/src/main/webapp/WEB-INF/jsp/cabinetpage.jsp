@@ -13,7 +13,7 @@
             </div>
             <div class="col-xs-4" align="center">
                 <!--img src="../../img/menu/customerlogin.png" alt="customerlogin.png" class="img-responsive"-->
-                ${sessionScope.cabinetPage}
+                ${requestScope.displayMain}
             </div>
             <div class="col-xs-4">
                 <!--empty-->
@@ -30,7 +30,7 @@
                         <!--empty-->
                     </div>
                     <div class="col-xs-4" align="center">
-                        SHOW HISTORY
+                        SHOW HISTORY (Page=${sessionScope.cabinetPage})
                         <br>
                         <a href="/cabinet" role="button" class="btn btn-primary pull-center">
                             BACK <fmt:message key="BODY_BTN_GET" />
@@ -62,6 +62,7 @@
             </div>
         </c:when>
         <c:otherwise>
+
             <!-- Thumbnails -->
             <div class="container thumbs">
                 <div class="col-sm-4 col-md-4">
@@ -85,9 +86,12 @@
                             <h3 class=""><fmt:message key="NAV_MENU_HISTORY" /></h3>
                             <p>View my orders...</p>
                             <div class="btn-toolbar text-center">
-                                <a href="?page=history" role="button" class="btn btn-primary pull-center">
-                                    <fmt:message key="BODY_BTN_GET" />
-                                </a>
+                                <form action="" method="get">
+                                    <input type="hidden" name="page" value="history" />
+
+                                    <input role="button" class="btn btn-primary pull-center"
+                                           type="submit" value="<fmt:message key="BODY_BTN_GET" />" />
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -99,7 +103,7 @@
                             <h3 class=""><fmt:message key="NAV_MENU_SETTINGS" /></h3>
                             <p>Change some data...</p>
                             <div class="btn-toolbar text-center">
-                                <a href="?page=settings" role="button" class="btn btn-primary pull-center">
+                                <a href="/cabinetsettings" role="button" class="btn btn-primary pull-center">
                                     <fmt:message key="BODY_BTN_SET" />
                                 </a>
                             </div>

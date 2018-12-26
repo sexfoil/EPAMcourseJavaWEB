@@ -39,11 +39,11 @@
                 <form action="" method="post">
                     <img src="../../img/menu/logicon.png" alt="logicon.png" class="img-responsive">
                     <br>
-                    <input type="text" name="login" value="${requestScope.oldInput}" placeholder="Enter login"/>
+                    <input type="text" name="login" value="${requestScope.oldInput}" placeholder="enter login"/>
                     <!--img src="../../img/menu/passicon.png" alt="passicon.png" class="img-responsive"-->
                     <br>
                     <br>
-                    <input type="password" name="password" placeholder="Enter password"/>
+                    <input type="password" name="password" placeholder="enter password"/>
                     <br>
                     <input type="image" src="../../img/menu/login_small.png"/>
                 </form>
