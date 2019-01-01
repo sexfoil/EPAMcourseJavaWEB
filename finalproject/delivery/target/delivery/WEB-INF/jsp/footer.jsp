@@ -1,7 +1,7 @@
 
 <!-- Footer -->
 <div class="footer text-center">
-    <p>&copy; 2018 Delivery Service. EPAM Java-WEB <fmt:message key="FOOTER_AUTHOR" />.</p>
+    <p>&copy; 2018 Delivery Service. Java-WEB <fmt:message key="FOOTER_AUTHOR" />.</p>
 </div>
 <!-- End Footer -->
 

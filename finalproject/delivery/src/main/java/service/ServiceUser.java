@@ -4,6 +4,7 @@ import model.database.dao.connection.ConnectionPoolMysqlDelivery;
 import model.database.dao.factory.DeliveryMySQLDaoFactory;
 import model.database.dao.mysql.delivery.UserDao;
 import model.entity.user.User;
+import utility.DeliveryNames;
 
 
 public class ServiceUser {
@@ -13,7 +14,7 @@ public class ServiceUser {
     public ServiceUser() {
 
         dao = (UserDao) DeliveryMySQLDaoFactory.getInstance()
-                .getDao("users", ConnectionPoolMysqlDelivery.getConnection());
+                .getDao(DeliveryNames.USERS, ConnectionPoolMysqlDelivery.getConnection());
     }
 
     public User getUser(String login) {

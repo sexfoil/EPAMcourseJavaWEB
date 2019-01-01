@@ -85,8 +85,7 @@ public class UserDao extends AbstractDAO {
 
     private String buildInsertUserQuery(User user) {
         StringBuilder query = new StringBuilder("insert into users ");
-        query.append("(first_name, last_name, login, password, email, age, sex, user_data) ");
-        query.append("values ('");
+        query.append("(first_name, last_name, login, password, email, age, sex, user_data) values ('");
         query.append(user.getFirstName()).append("', '");
         query.append(user.getLastName()).append("', '");
         query.append(user.getLogin()).append("', '");

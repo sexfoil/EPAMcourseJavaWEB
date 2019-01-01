@@ -3,6 +3,7 @@ model\entity\Street.class
 model\entity\Invoice.class
 model\database\dao\mysql\delivery\InvoiceDao.class
 controller\RegisterController.class
+utility\Pages.class
 controller\CabinetSettingsController.class
 service\Language.class
 controller\LoginController.class
@@ -12,7 +13,7 @@ model\entity\user\UserData.class
 controller\InfoMainController.class
 utility\Validator.class
 controller\OrderController.class
-utility\filters\StartFilter.class
+utility\DeliveryNames.class
 model\database\dao\AbstractDAO.class
 model\database\dao\mysql\delivery\CargoDao.class
 utility\filters\LanguageFilter.class
@@ -22,16 +23,16 @@ utility\filters\CabinetFilter.class
 model\entity\Cargo.class
 model\database\dao\mysql\delivery\UserDataDao.class
 model\database\dao\factory\DeliveryMySQLDaoFactory.class
+utility\filters\InitFilter.class
 model\database\dao\factory\DaoFactory.class
-model\database\dao\mysql\delivery\DeliveryMysqlTables.class
 utility\LanguageManager.class
 model\entity\Address.class
 controller\CabinetHistoryController.class
 model\database\dao\connection\ConnectionPoolMysqlDelivery.class
 model\database\dao\mysql\delivery\AddressDao.class
 controller\CalculatorController.class
+model\database\dao\factory\DeliveryMySQLDaoFactory$1.class
 controller\InfoDirectionsController.class
 model\database\dao\mysql\delivery\UserDao.class
 service\ServiceUser.class
 controller\CabinetMainController.class
-model\database\MySQLDataBaseWorker.class

@@ -8,6 +8,7 @@
         </div>
         <div class="col-xs-4" align="center">
             <!--img src="../../img/menu/customerlogin.png" alt="customerlogin.png" class="img-responsive"-->
+            REQUEST: ${requestScope.temp}
         </div>
         <div class="col-xs-4">
             <!--empty-->

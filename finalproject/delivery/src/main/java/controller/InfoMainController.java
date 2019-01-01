@@ -2,6 +2,7 @@ package controller;
 
 import model.entity.user.User;
 import model.entity.user.UserData;
+import utility.Pages;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -53,8 +54,7 @@ public class InfoMainController extends HttpServlet {
         if (user != null) {
             resp.sendRedirect("/cabinet");
         } else {
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsp/infopage.jsp");
-            dispatcher.forward(req, resp);
+            getServletContext().getRequestDispatcher(Pages.INFO_JSP.getUrl()).forward(req, resp);
         }
 
     }

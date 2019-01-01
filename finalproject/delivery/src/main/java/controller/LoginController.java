@@ -3,6 +3,7 @@ package controller;
 import model.entity.user.User;
 import model.entity.user.UserData;
 import service.ServiceUser;
+import utility.Pages;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -59,8 +60,7 @@ public class LoginController extends HttpServlet {
         if (user != null) {
             resp.sendRedirect("/cabinet");
         } else {
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsp/loginpage.jsp");
-            dispatcher.forward(req, resp);
+            getServletContext().getRequestDispatcher(Pages.LOGIN_JSP.getUrl()).forward(req, resp);
         }
 
     }

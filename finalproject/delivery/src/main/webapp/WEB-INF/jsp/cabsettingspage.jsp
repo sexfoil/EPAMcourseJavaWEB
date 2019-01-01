@@ -10,7 +10,9 @@
             </div>
             <div class="col-xs-4" align="center">
                 <!--img src="../../img/menu/customerlogin.png" alt="customerlogin.png" class="img-responsive"-->
-                SETTINGS
+                <a href="/cabinet" role="button" class="btn btn-primary pull-center">
+                    BACK TO CABINET <fmt:message key="BODY_BTN_SET" />
+                </a>
             </div>
             <div class="col-xs-4">
                 <!--empty-->

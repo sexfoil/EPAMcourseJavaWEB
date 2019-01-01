@@ -3,6 +3,7 @@ package controller;
 import model.entity.user.User;
 import model.entity.user.UserData;
 import service.ServiceUser;
+import utility.Pages;
 import utility.Validator;
 
 import javax.servlet.RequestDispatcher;
@@ -57,8 +58,7 @@ public class RegisterController extends HttpServlet {
         if (user != null) {
             resp.sendRedirect("/login");
         } else {
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsp/registerpage.jsp");
-            dispatcher.forward(req, resp);
+            getServletContext().getRequestDispatcher(Pages.REGISTER_JSP.getUrl()).forward(req, resp);
         }
 
     }

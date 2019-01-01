@@ -20,8 +20,7 @@ public class CabinetSettingsController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("SETTINGS GET");
 
-        session = req.getSession();
-        user = (User) session.getAttribute("user");
+        initParameters(req);
         redirect(req, resp, user);
 
     }
@@ -29,9 +28,13 @@ public class CabinetSettingsController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("SETTINGS POST");
 
-        session = req.getSession();
-        session.setAttribute("user", user);
+        initParameters(req);
         redirect(req, resp, user);
+    }
+
+    private void initParameters(HttpServletRequest request) {
+        session = request.getSession();
+        user = (User) session.getAttribute("user");
     }
 
     private void redirect(HttpServletRequest req, HttpServletResponse resp, User user) throws IOException, ServletException {

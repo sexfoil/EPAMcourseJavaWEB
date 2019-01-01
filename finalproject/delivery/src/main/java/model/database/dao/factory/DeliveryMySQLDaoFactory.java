@@ -2,13 +2,14 @@ package model.database.dao.factory;
 
 import model.database.dao.AbstractDAO;
 import model.database.dao.mysql.delivery.*;
+import utility.DeliveryNames;
 
 import java.sql.Connection;
 
-public class DeliveryMySQLDaoFactory extends DaoFactory implements DeliveryMysqlTables {
+public class DeliveryMySQLDaoFactory extends DaoFactory {
     @Override
-    public AbstractDAO getDao(String tableName, Connection connection) {
-        switch (tableName) {
+    public AbstractDAO getDao(DeliveryNames name, Connection connection) {
+        switch (name) {
             case USERS: return new UserDao(connection);
             case USERS_DATA: return new UserDataDao(connection);
             case ADDRESSES: return new AddressDao(connection);
