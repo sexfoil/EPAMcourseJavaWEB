@@ -24,24 +24,24 @@
 
     <div class="jumbotron">
         <div class="container">
-            <div class="col-xs-1">
+            <div class="col-xs-3">
                 <!--empty-->
             </div>
-            <div class="col-xs-10" align="center">
+            <div class="col-xs-6" align="center">
 
                 <form action="" method="post">
 
-                    <table border="0">
+                    <table border="1">
                         <!--address-->
-                        <tr>
+                        <tr align="center">
                             <th>
-
+                                NAME
                             </th>
                             <th width="50%">
-
+                                CURRENT
                             </th>
                             <th>
-
+                                CHANGE
                             </th>
                         </tr>
                         <tr>
@@ -98,12 +98,12 @@
                     </table>
 
                     <input role="button" class="btn btn-primary pull-center"
-                           type="submit" value="<fmt:message key="BODY_BTN_SET"/> CHANGES"/>
+                           type="submit" value="<fmt:message key="BODY_BTN_SAVE"/>"/>
 
                 </form>
 
             </div>
-            <div class="col-xs-1">
+            <div class="col-xs-3">
                 <!--empty-->
             </div>
         </div>

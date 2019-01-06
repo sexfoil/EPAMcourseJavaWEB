@@ -21,6 +21,10 @@ public class ServiceUser {
         return dao.getUserByString(login, "login");
     }
 
+    public User getUserId(String login) {
+        return dao.getUserByString(login, "login");
+    }
+
     public boolean addUser(String firstName, String lastName, String login, String password,
                            String email, String sex, int age) {
         User newUser = new User(0, firstName, lastName, login, password, email, sex, age, null);

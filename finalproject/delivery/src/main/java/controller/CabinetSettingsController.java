@@ -1,6 +1,7 @@
 package controller;
 
 import model.entity.user.User;
+import utility.Pages;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebServlet(name = "cabinetSettingsServlet", urlPatterns = "/cabinetsettings")
+@WebServlet(name = "cabinetSettingsServlet", urlPatterns = "/cabinet_settings")
 public class CabinetSettingsController extends HttpServlet {
 
     private HttpSession session = null;
@@ -42,11 +43,7 @@ public class CabinetSettingsController extends HttpServlet {
         if (user == null) {
             resp.sendRedirect("/login");
         } else {
-
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsp/cabsettingspage.jsp");
-            dispatcher.forward(req, resp);
-            System.out.println("forwarding.............");
-
+            getServletContext().getRequestDispatcher(Pages.CABINET_SETTINGS_JSP.getUrl()).forward(req, resp);
         }
 
     }

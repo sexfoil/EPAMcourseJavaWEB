@@ -1,6 +1,7 @@
 package utility;
 
 public enum Pages {
+    INDEX,
     CABINET_HISTORY_JSP("cabhistorypage.jsp"),
     CABINET_SETTINGS_JSP("cabsettingspage.jsp"),
     CABINET_JSP("cabinetpage.jsp"),
@@ -12,6 +13,10 @@ public enum Pages {
 
     private String url;
     private String path = "/WEB-INF/jsp/";
+
+    Pages() {
+        url = "/index.jsp";
+    }
 
     Pages(String pageName) {
         url = path + pageName;

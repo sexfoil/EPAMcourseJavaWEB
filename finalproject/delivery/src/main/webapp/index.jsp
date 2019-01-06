@@ -8,7 +8,6 @@
         </div>
         <div class="col-xs-4" align="center">
             <!--img src="../../img/menu/customerlogin.png" alt="customerlogin.png" class="img-responsive"-->
-            REQUEST: ${requestScope.temp}
         </div>
         <div class="col-xs-4">
             <!--empty-->
@@ -27,7 +26,7 @@
                 <h3 class=""><fmt:message key="NAV_MENU_PRICES" /></h3>
                 <p>Our prices and tariffs...</p>
                 <div class="btn-toolbar text-center">
-                    <a href="/info?page=prices" role="button" class="btn btn-primary pull-center">
+                    <a href="/info_prices" role="button" class="btn btn-primary pull-center">
                         <fmt:message key="BODY_BTN_EXPLORE" />
                     </a>
                 </div>
@@ -41,7 +40,7 @@
                 <h3 class=""><fmt:message key="NAV_MENU_DIRECTIONS" /></h3>
                 <p>Directions of delivering...</p>
                 <div class="btn-toolbar text-center">
-                    <a href="/info?page=directions" role="button" class="btn btn-primary pull-center">
+                    <a href="/info_directions" role="button" class="btn btn-primary pull-center">
                         <fmt:message key="BODY_BTN_EXPLORE" />
                     </a>
                 </div>
@@ -50,13 +49,13 @@
     </div>
     <div class="col-sm-4 col-md-4">
         <div class="thumbnail">
-            <img src="img/menu/calculator.png" alt="order" class="img-responsive">
+            <img src="img/menu/calculator.png" alt="calculator.png" class="img-responsive">
             <div class="caption" align="center">
                 <h3 class=""><fmt:message key="NAV_MENU_CALCULATOR" /></h3>
                 <p>Calculate your order...</p>
                 <div class="btn-toolbar text-center">
                     <a href="/calculator" role="button" class="btn btn-primary pull-center">
-                        <fmt:message key="BODY_BTN_EXPLORE" />
+                        <fmt:message key="BODY_BTN_COMPUTE" />
                     </a>
                 </div>
             </div>

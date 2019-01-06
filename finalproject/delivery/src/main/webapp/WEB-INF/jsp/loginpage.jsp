@@ -15,6 +15,9 @@
                     <c:when test="${requestScope.authorizationError}">
                         <h6><font color="red"><fmt:message key="MSG_WRONG_LOGIN_OR_PASS"/></font></h6>
                     </c:when>
+                    <c:when test="${requestScope.logInError}">
+                        <h6><font color="red">ALREADY LOG IN !!!</font></h6>
+                    </c:when>
                     <c:otherwise>
                         <h6><font color="red"><br></font></h6>
                     </c:otherwise>

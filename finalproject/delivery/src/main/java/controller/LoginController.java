@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.HashSet;
 
 @WebServlet (name = "loginServlet", urlPatterns = "/login")
 public class LoginController extends HttpServlet {
@@ -38,12 +39,16 @@ public class LoginController extends HttpServlet {
             User userExist = login != null ? service.getUser(login) : null;
 
             if (userExist != null && req.getParameter("password").equals(userExist.getPassword())) {
-                user = userExist;
-                session.setAttribute("user", user);
+                if (isUserLogIn(login)) {
+                    user = userExist;
+                    session.setAttribute("user", user);
+                } else {
+                    req.setAttribute("logInError", true);
+                }
             } else {
                 req.setAttribute("authorizationError", true);
-                req.setAttribute("oldInput", login);
             }
+            req.setAttribute("oldInput", login);
         }
 
         redirect(req, resp, user);
@@ -63,6 +68,11 @@ public class LoginController extends HttpServlet {
             getServletContext().getRequestDispatcher(Pages.LOGIN_JSP.getUrl()).forward(req, resp);
         }
 
+    }
+
+    private boolean isUserLogIn(String userLogin) {
+        //HashSet<String> users = (HashSet<String>) getServletContext().getAttribute("usersPool");
+        return ((HashSet<String>) getServletContext().getAttribute("usersPool")).add(userLogin);
     }
 
 }

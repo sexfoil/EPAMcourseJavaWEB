@@ -2,6 +2,7 @@ package controller;
 
 import model.entity.user.User;
 import model.entity.user.UserData;
+import utility.Pages;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -27,23 +28,21 @@ public class CabinetMainController extends HttpServlet {
 
     }
 
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        System.out.println("MAIN POST");
-        session = req.getSession();
-        session.setAttribute("user", user);
-        redirect(req, resp, user);
-
-    }
+//    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//
+//        System.out.println("MAIN POST");
+//        session = req.getSession();
+//        session.setAttribute("user", user);
+//        redirect(req, resp, user);
+//
+//    }
 
     private void redirect(HttpServletRequest req, HttpServletResponse resp, User user) throws IOException, ServletException {
 
         if (user == null) {
             resp.sendRedirect("/login");
         } else {
-
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsp/cabinetpage.jsp");
-            dispatcher.forward(req, resp);
+            getServletContext().getRequestDispatcher(Pages.CABINET_JSP.getUrl()).forward(req, resp);
         }
 
     }
