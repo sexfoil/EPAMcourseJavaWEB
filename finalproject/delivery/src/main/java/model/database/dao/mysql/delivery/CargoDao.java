@@ -11,8 +11,9 @@ public class CargoDao extends AbstractDAO {
         super(connection);
     }
 
+
     @Override
-    public List[] getAll() {
-        return new List[0];
+    public List getAll() {
+        return null;
     }
 }

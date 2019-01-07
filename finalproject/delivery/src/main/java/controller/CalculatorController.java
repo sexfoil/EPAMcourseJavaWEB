@@ -1,10 +1,14 @@
 package controller;
 
+import model.entity.Cargo;
+import model.entity.CargoType;
+import model.entity.Street;
 import model.entity.user.User;
-import service.ServiceUser;
+import service.delivery.ServiceCargoTypes;
+import service.factory.DeliveryServiceFactory;
+import utility.DeliveryNames;
 import utility.Pages;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,61 +16,89 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @WebServlet(name = "calculatorServlet", urlPatterns = "/calculator")
 public class CalculatorController extends HttpServlet {
 
-    private HttpSession session = null;
-    private User user = null;
-
-    // TODO
+    HttpSession session = null;
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        List<String> list = new ArrayList<>();
-        for (int i=10; i <100; i++) {
-            list.add("_" + i + "th_Street");
+        if (req.getParameter("lang") == null) {
+            session = req.getSession();
+
+            session.setAttribute("weightError", null);
+            session.setAttribute("calculatedCargo", null);
+            session.setAttribute("calculatedCost", null);
+            session.setAttribute("oldWeight", null);
+            session.setAttribute("oldStreet", null);
         }
 
-        req.setAttribute("streetsList", list);
-
-        initParameters(req);
-        redirect(req, resp, user);
+        getServletContext().getRequestDispatcher(Pages.CALCULATOR_JSP.getUrl()).forward(req, resp);
 
     }
+
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        initParameters(req);
+        session = req.getSession();
 
-        double weight = Double.parseDouble(req.getParameter("weight"));
-        String type = req.getParameter("cargoType");
-        String street = req.getParameter("street");
-        String date = req.getParameter("date");
-        System.out.println("Date: " + date);
+        int weight = Integer.parseInt(req.getParameter("weight"));
+        List<CargoType> cargoTypes = (List<CargoType>) session.getAttribute("cargoTypes");
+        CargoType cargoType = getCargoType(cargoTypes, weight);
 
-        req.setAttribute("type", (type.equals("") ? "(crap)" : type));
-        req.setAttribute("direction", (street.equals("") ? "(empty)" : street));
-        req.setAttribute("distance", (street.equals("") ? "(DB data)" : 1234));
-        req.setAttribute("date", (date == null ? "(no date)" : date));
-        req.setAttribute("cost", (100 * weight));
+        String streetName = req.getParameter("street");
+        List<Street> streets = (List<Street>) session.getAttribute("streetsList");
+        Street street = getStreet(streets, streetName);
 
+        if (cargoType == null) {
+            session.setAttribute("weightError", "TOO MUCH!!!");
+        }
+        if (street == null) {
+            session.setAttribute("streetError", "WRONG STREET!!!");
+        }
 
-        redirect(req, resp, user);
+        if (cargoType != null && street != null) {
+            double cost = getCalculatedCost(cargoType, street);
+            session.setAttribute("calculatedCargo", cargoType.getType());
+            session.setAttribute("calculatedCost", cost);
+        }
 
-    }
-
-    private void initParameters(HttpServletRequest request) {
-        session = request.getSession();
-        user = (User) session.getAttribute("user");
-    }
-
-    private void redirect(HttpServletRequest req, HttpServletResponse resp, User user) throws IOException, ServletException {
+        session.setAttribute("oldWeight", weight);
+        session.setAttribute("oldStreet", street);
 
         getServletContext().getRequestDispatcher(Pages.CALCULATOR_JSP.getUrl()).forward(req, resp);
+
+    }
+
+
+    private double getCalculatedCost(CargoType cargoType, Street street) {
+        int typeRate = cargoType.getRate();
+        int distance = street.getDistance();
+        double currentPriceRate = (double) session.getAttribute("currentPriceRate");
+
+        return typeRate * distance * currentPriceRate;
+    }
+
+
+    private CargoType getCargoType(List<CargoType> cargoTypes, int weight) {
+
+        Optional<CargoType> matchingType = cargoTypes.stream()
+                .filter(cargo -> weight > cargo.getMinWeight() && weight <= cargo.getMaxWeight()).findFirst();
+
+        return matchingType.orElse(null);
+    }
+
+
+    private Street getStreet(List<Street> streets, String name) {
+
+        Optional<Street> matchingStreet = streets.stream().filter(n -> name.equals(n.getName())).findFirst();
+
+        return matchingStreet.orElse(null);
 
     }
 

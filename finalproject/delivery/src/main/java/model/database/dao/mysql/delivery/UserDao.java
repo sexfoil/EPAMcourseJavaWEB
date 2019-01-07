@@ -4,10 +4,8 @@ import model.database.dao.AbstractDAO;
 import model.entity.user.User;
 import model.entity.user.UserData;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserDao extends AbstractDAO {
@@ -16,26 +14,17 @@ public class UserDao extends AbstractDAO {
         super(connection);
     }
 
-    public User getUserById(int id) {
-        try (Statement statement = connection.createStatement()) {
-            ResultSet result = statement.executeQuery("select * from users where id='" + id + "';");
-            result.next();
-            //name = result.getString("first_name");
-            //System.out.println("User = " + name);
-            connection.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return new User();
-    }
 
     public User getUserByString(String value, String field) {
-        String query = "select * from users where " + field + "='" + value + "'";
+        String query = "select * from users where " + field + " = ?;";
         User user = null;
-        try (Statement statement = connection.createStatement()) {
-            user = getUser(statement.executeQuery(query));
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, value);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            user = getUser(resultSet);
             System.out.println("GET USER=" + user);
         } catch (SQLException e) {
+            // TODO
             e.printStackTrace();
         }
         return user;
@@ -47,6 +36,7 @@ public class UserDao extends AbstractDAO {
             statement.executeUpdate(query);
             System.out.println("CREATE USER=" + user.getLogin());
         } catch (SQLException e) {
+            // TODO
             e.printStackTrace();
             return false;
         }
@@ -55,15 +45,10 @@ public class UserDao extends AbstractDAO {
     }
 
     @Override
-    public List[] getAll() {
-        return new List[0];
+    public List getAll() {
+        return null;
     }
 
-    private ResultSet getResultSet(String queryString) throws SQLException {
-        try (Statement statement = connection.createStatement()) {
-            return statement.executeQuery(queryString);
-        }
-    }
 
     private User getUser(ResultSet result) throws SQLException {
         User user = null;
@@ -76,23 +61,26 @@ public class UserDao extends AbstractDAO {
                     result.getString("password"),
                     result.getString("email"),
                     result.getString("sex"),
-                    result.getInt("age"),
-                    (UserData) result.getObject("user_data")
+                    result.getInt("age")
+
             );
         }
         return user;
     }
 
+
     private String buildInsertUserQuery(User user) {
+
         StringBuilder query = new StringBuilder("insert into users ");
-        query.append("(first_name, last_name, login, password, email, age, sex, user_data) values ('");
+        query.append("(first_name, last_name, login, password, email, age, sex) values ('");
         query.append(user.getFirstName()).append("', '");
         query.append(user.getLastName()).append("', '");
         query.append(user.getLogin()).append("', '");
         query.append(user.getPassword()).append("', '");
         query.append(user.getEmail()).append("', ");
         query.append(user.getAge()).append(", '");
-        query.append(user.getSex()).append("', NULL);");
+        query.append(user.getSex()).append("');");
+
         System.out.println(query.toString());
         return query.toString();
     }

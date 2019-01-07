@@ -11,7 +11,7 @@
             <div class="col-xs-4" align="center">
                 <!--img src="../../img/menu/customerlogin.png" alt="customerlogin.png" class="img-responsive"-->
                 <a href="/cabinet" role="button" class="btn btn-primary pull-center">
-                    BACK TO CABINET <fmt:message key="BODY_BTN_SET" />
+                    BACK TO CABINET <fmt:message key="BODY_BTN_SET"/>
                 </a>
             </div>
             <div class="col-xs-4">
@@ -33,48 +33,86 @@
 
                     <table border="1">
                         <!--address-->
+                        <thead>
                         <tr align="center">
-                            <th>
+                            <td>
                                 NAME
-                            </th>
-                            <th width="50%">
+                            </td>
+                            <td width="50%">
                                 CURRENT
-                            </th>
-                            <th>
+                            </td>
+                            <td>
                                 CHANGE
-                            </th>
+                            </td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>
+                                CELL NUMBER
+                            </td>
+                            <td>
+                                    ${sessionScope.userData.cellNumber}
+                            </td>
+                            <td>
+                                <input type="text" name="cell" value="${requestScope.oldCell}"/>
+                            </td>
                         </tr>
                         <tr>
                             <td>
-                                <img src="../../img/menu/reg_name.png" alt="reg_name.png">
+                                STREET
                             </td>
                             <td>
-                                    ${sessionScope.user.userData.address}
+                                    ${sessionScope.userStreet}
                             </td>
                             <td>
-                                <input type="text" name="street" value="${requestScope.st}"
-                                       placeholder="change street"/><br>
-                                <input type="text" name="building" value="${requestScope.bi}"
-                                       placeholder="change building"/><br>
-                                <input type="text" name="section" value="${requestScope.se}"
-                                       placeholder="change section"/><br>
-                                <input type="text" name="apartment" value="${requestScope.ap}"
-                                       placeholder="change apartment"/><br>
-                                <h5><font color="red">${requestScope.userError}</font></h5>
+                                <input type="text" name="street" value="${requestScope.oldStreet}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                BUILD.
+                            </td>
+                            <td>
+                                    ${sessionScope.userAddress.building}
+                            </td>
+                            <td>
+                                <input type="text" name="building" value="${requestScope.oldBuilding}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                SECTION
+                            </td>
+                            <td>
+                                    ${sessionScope.userAddress.section}
+                            </td>
+                            <td>
+                                <input type="text" name="section" value="${requestScope.oldSection}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                APART.
+                            </td>
+                            <td>
+                                    ${sessionScope.userAddress.apartment}
+                            </td>
+                            <td>
+                                <input type="text" name="apartment" value="${requestScope.oldApartment}"/>
                             </td>
                         </tr>
 
                         <!--e-mail-->
                         <tr>
                             <td>
-                                <img src="../../img/menu/reg_email.png" alt="reg_email.png">
+                                E-MAIL
                             </td>
                             <td>
-                                    ${sessionScope.user.firstName}
+                                    ${sessionScope.user.email}
                             </td>
                             <td>
-                                <input type="text" name="email" value="${requestScope.prevEmail}"
-                                       placeholder="change e-mail"/>
+                                <input type="text" name="email" value="${requestScope.oldEmail}"/>
                                 <h5><font color="red">${requestScope.emailError}</font></h5>
                             </td>
                         </tr>
@@ -82,7 +120,7 @@
                         <!--password-->
                         <tr>
                             <td>
-                                <img src="../../img/menu/reg_pass.png" alt="reg_pass.png">
+                                PASSWORD
                             </td>
                             <td>
                                     ${sessionScope.user.password}
@@ -94,11 +132,12 @@
                                 <h5><font color="red">${requestScope.pass2Error}</font></h5>
                             </td>
                         </tr>
-
+                        </tbody>
                     </table>
 
-                    <input role="button" class="btn btn-primary pull-center"
-                           type="submit" value="<fmt:message key="BODY_BTN_SAVE"/>"/>
+                    <input role="button" class="btn btn-primary pull-center" type="submit"
+                           value="<fmt:message key="BODY_BTN_SAVE"/>"
+                    />
 
                 </form>
 

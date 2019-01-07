@@ -1,11 +1,11 @@
 package controller;
 
 import model.entity.user.User;
-import model.entity.user.UserData;
-import service.ServiceUser;
+import service.delivery.ServiceUser;
+import service.factory.DeliveryServiceFactory;
+import utility.DeliveryNames;
 import utility.Pages;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -33,7 +33,7 @@ public class LoginController extends HttpServlet {
         initParameters(req);
 
         if (user == null) {
-            ServiceUser service = new ServiceUser();
+            ServiceUser service = (ServiceUser) DeliveryServiceFactory.getInstance().getService(DeliveryNames.USERS);
 
             String login = req.getParameter("login");
             User userExist = login != null ? service.getUser(login) : null;

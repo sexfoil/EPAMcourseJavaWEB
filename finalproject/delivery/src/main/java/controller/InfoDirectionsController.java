@@ -1,6 +1,6 @@
 package controller;
 
-import model.entity.user.User;
+import model.entity.Street;
 import utility.Pages;
 
 import javax.servlet.ServletException;
@@ -21,45 +21,45 @@ public class InfoDirectionsController extends HttpServlet {
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        // TODO
-
         session = req.getSession();
+        setCurrentPageStreets(req);
 
-        // MOVE TO INIT FILTER THEN
-        if (session.getAttribute("streetsList") == null) {
+        req.setAttribute("directionsPage", true);
 
-            List<String> list = new ArrayList<>();
-            for (int i = 10; i < 100; i++) {
-                list.add("_" + i + "th_Street");
-            }
+        getServletContext().getRequestDispatcher(Pages.INFO_JSP.getUrl()).forward(req, resp);
 
-            session.setAttribute("streetsList", list);
-            session.setAttribute("streetsListSize", list.size());
+    }
 
+    private void setCurrentPageStreets(HttpServletRequest request) {
+        String pageParam = request.getParameter("page");
+        int pageNum = 1;
+        try {
+            pageNum = Integer.parseInt(pageParam);
+        } catch (NumberFormatException e) {
+            // TODO
+            System.out.println("NULL or 1: \n" + e);
         }
 
-        String pageParam = req.getParameter("page");
-        int pageNum = pageParam == null ? 1 : Integer.parseInt(pageParam); // TRY CATCH !!!
+        if (request.getParameter("lang") != null) {
+            pageNum = (int) session.getAttribute("paginationNumber");
+        }
+
         int pageStep = (int) session.getAttribute("rowOnPage");
 
-        List<String> listAll = (List<String>) session.getAttribute("streetsList");
-        int listSize = listAll.size();
+        List<Street> listAll = (List<Street>) session.getAttribute("streetsList");
+        int listSize = (int) session.getAttribute("streetsListSize");
+
         int lastPage = listSize / pageStep + (listSize % pageStep == 0 ? 0 : 1);
 
         int from = (pageNum - 1) * pageStep;
         int to = (from + pageStep) < listSize ? (from + pageStep) : listSize;
-        List<String> listPage = new ArrayList<>(listAll.subList(from, to));
-//        for (int i = 0; i < pageStep; i++) {
-//            int index = (pageNum - 1) * pageStep + i;
-//            listPage.add(listAll.get(index));
-//        }
-        req.setAttribute("streetsListPage", listPage);
-        req.setAttribute("pageNum", pageNum);
-        req.setAttribute("lastPage", lastPage);
-        //session.setAttribute("infoPage", "SESSION INFO ATTRIBUTE DIRECTIONS");
-        req.setAttribute("directionsPage", true);
 
-        getServletContext().getRequestDispatcher(Pages.INFO_JSP.getUrl()).forward(req, resp);
+        List<Street> pageList = new ArrayList<>(listAll.subList(from, to));
+
+        request.setAttribute("streetsListPage", pageList);
+        request.setAttribute("pageNum", pageNum);
+        session.setAttribute("paginationNumber", pageNum);
+        request.setAttribute("lastPage", lastPage);
 
     }
 

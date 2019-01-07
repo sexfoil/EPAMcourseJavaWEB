@@ -6,15 +6,15 @@ import utility.DeliveryNames;
 import java.sql.Connection;
 
 
-public abstract class DaoFactory {
+public abstract class AbstractDaoFactory {
 
-    protected static DaoFactory daoFactory;
+    protected static AbstractDaoFactory daoFactory;
 
     public abstract AbstractDAO getDao(DeliveryNames name, Connection connection);
 
-    public static DaoFactory getInstance() {
+    public static AbstractDaoFactory getInstance() {
         if( daoFactory == null ){
-            synchronized (DaoFactory.class){
+            synchronized (AbstractDaoFactory.class){
                 if(daoFactory == null){
                     daoFactory = new DeliveryMySQLDaoFactory();
                 }

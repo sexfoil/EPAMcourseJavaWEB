@@ -6,7 +6,7 @@ import utility.DeliveryNames;
 
 import java.sql.Connection;
 
-public class DeliveryMySQLDaoFactory extends DaoFactory {
+public class DeliveryMySQLDaoFactory extends AbstractDaoFactory {
     @Override
     public AbstractDAO getDao(DeliveryNames name, Connection connection) {
         switch (name) {
@@ -16,7 +16,10 @@ public class DeliveryMySQLDaoFactory extends DaoFactory {
             case STREETS: return new StreetDao(connection);
             case INVOICES: return new InvoiceDao(connection);
             case CARGOES: return new CargoDao(connection);
+            case CARGO_TYPES: return new CargoTypesDao(connection);
+            case STATUS: return new StatusDao(connection);
             default:
+                // TODO
                 System.out.println("NOT IN CASE DAO FACTORY...");
         }
         return null;

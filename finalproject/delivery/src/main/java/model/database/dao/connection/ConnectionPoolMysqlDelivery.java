@@ -23,8 +23,9 @@ public class ConnectionPoolMysqlDelivery {
                     bds.setUrl(resource.getString("url"));
                     bds.setUsername(resource.getString("user"));
                     bds.setPassword(resource.getString("password"));
-                    bds.setMinIdle(Integer.valueOf(resource.getString("min")));
-                    bds.setMaxIdle(Integer.valueOf(resource.getString("max")));
+                    bds.setMaxActive(Integer.valueOf(resource.getString("maxActive")));
+                    bds.setMinIdle(Integer.valueOf(resource.getString("minIdle")));
+                    bds.setMaxIdle(Integer.valueOf(resource.getString("maxIdle")));
                     bds.setMaxOpenPreparedStatements(Integer.valueOf(resource.getString("statements")));
 
                     dataSource = bds;

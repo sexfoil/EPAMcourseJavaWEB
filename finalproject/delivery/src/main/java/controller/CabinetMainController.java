@@ -1,7 +1,14 @@
 package controller;
 
+import model.entity.Address;
+import model.entity.Street;
 import model.entity.user.User;
 import model.entity.user.UserData;
+import service.delivery.ServiceAddress;
+import service.delivery.ServiceStreet;
+import service.delivery.ServiceUserData;
+import service.factory.DeliveryServiceFactory;
+import utility.DeliveryNames;
 import utility.Pages;
 
 import javax.servlet.RequestDispatcher;
@@ -21,10 +28,15 @@ public class CabinetMainController extends HttpServlet {
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        System.out.println("MAIN GET");
         session = req.getSession();
         user = (User) session.getAttribute("user");
-        redirect(req, resp, user);
+
+        if (user != null) {
+            setUserDataToSession(user.getId());
+            getServletContext().getRequestDispatcher(Pages.CABINET_JSP.getUrl()).forward(req, resp);
+        } else {
+            resp.sendRedirect("/login");
+        }
 
     }
 
@@ -37,13 +49,23 @@ public class CabinetMainController extends HttpServlet {
 //
 //    }
 
-    private void redirect(HttpServletRequest req, HttpServletResponse resp, User user) throws IOException, ServletException {
+    private void setUserDataToSession(int userId) {
+        // TODO
+        Address userAddress =
+                ((ServiceAddress) DeliveryServiceFactory.getInstance().getService(DeliveryNames.ADDRESSES))
+                .getUserAddress(userId);
 
-        if (user == null) {
-            resp.sendRedirect("/login");
-        } else {
-            getServletContext().getRequestDispatcher(Pages.CABINET_JSP.getUrl()).forward(req, resp);
-        }
+        Street userStreet =
+                ((ServiceStreet) DeliveryServiceFactory.getInstance().getService(DeliveryNames.STREETS))
+                .getStreetById(userAddress.getStreetId());
+
+        UserData userData =
+                ((ServiceUserData) DeliveryServiceFactory.getInstance().getService(DeliveryNames.USERS_DATA))
+                .getUserData(userId);
+
+        session.setAttribute("userData", userData);
+        session.setAttribute("userAddress", userAddress);
+        session.setAttribute("userStreet", (userStreet == null ? "" : userStreet.getName()));
 
     }
 

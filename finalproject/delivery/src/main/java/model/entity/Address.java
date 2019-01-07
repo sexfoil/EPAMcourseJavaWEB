@@ -8,9 +8,6 @@ public class Address {
     private String section;
     private String apartment;
 
-    public Address(int userId) {
-        this(userId, 0, "", "", "");
-    }
 
     public Address(int userId, int streetId, String building, String section, String apartment) {
         this.userId = userId;

@@ -1,20 +1,15 @@
 package model.entity.user;
 
+
 public class UserData {
 
     private int userId;
     private String cellNumber;
-    private String address;
 
 
-    public UserData(int userId) {
-        this(userId, "", "");
-    }
-
-    public UserData(int userId, String cellNumber, String address) {
+    public UserData(int userId, String cellNumber) {
         this.userId = userId;
         this.cellNumber = cellNumber;
-        this.address = address;
     }
 
 
@@ -34,11 +29,4 @@ public class UserData {
         this.cellNumber = cellNumber;
     }
 
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
 }

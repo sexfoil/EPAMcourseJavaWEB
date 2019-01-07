@@ -10,15 +10,13 @@ public class User {
     private String email;
     private String sex;
     private int age;
-    private UserData userData;
 
     public User() {
     }
 
     public User(int id, String firstName, String lastName,
                 String login, String password, String email,
-                String sex, int age,
-                UserData userData) {
+                String sex, int age) {
 
         this.id = id;
         this.firstName = firstName;
@@ -28,7 +26,6 @@ public class User {
         this.email = email;
         this.sex = sex;
         this.age = age;
-        this.userData = userData;
     }
 
     public int getId() {
@@ -95,11 +92,4 @@ public class User {
         this.age = age;
     }
 
-    public UserData getUserData() {
-        return userData;
-    }
-
-    public void setUserData(UserData userData) {
-        this.userData = userData;
-    }
 }

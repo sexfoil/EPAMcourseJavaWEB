@@ -4,10 +4,10 @@
 <!-- Info block -->
 <div class="jumbotron">
     <div class="container">
-        <div class="col-xs-3">
+        <div class="col-xs-2">
             <!--empty-->
         </div>
-        <div class="col-xs-6" align="center">
+        <div class="col-xs-8" align="center">
             <!--img src="../../img/menu/customerlogin.png" alt="customerlogin.png" class="img-responsive"-->
             <h6><font color="orange">
 
@@ -15,40 +15,41 @@
                     <table border="1" width="100%">
                         <thead align="center">
                         <tr>
-                            <td width="40%">
-                                <h5><fmt:message key="PRICE_TABLE_TITLE"/></h5>
+                            <td rowspan="2" width="40%">
+                                <h5>TYPE CARGO</h5>
                             </td>
-                            <td width="15%">
-                                L &gt; 1
+                            <td colspan="2">
+                                <h5>WEIGHT, g</h5>
                             </td>
-                            <td width="15%">
-                                L &gt; 1000
+                            <td rowspan="2" width="20%">
+                                <h5>PRICE, $/m</h5>
                             </td>
-                            <td width="15%">
-                                L &gt; 5000
+                        </tr>
+                        <tr>
+                            <td width="20%">
+                                <h5>min</h5>
                             </td>
-                            <td width="15%">
-                                L &gt; 10000
+                            <td width="20%">
+                                <h5>max</h5>
                             </td>
                         </tr>
                         </thead>
                         <tbody align="center">
-                        <c:forEach var="cargoes" begin="1" end="9">
+                        <c:forEach var="cargo" items="${sessionScope.cargoTypes}">
+                            <c:set var="price" value="${cargo.rate * sessionScope.currentPriceRate}"/>
+
                             <tr>
                                 <td align="left">
-                                    <h5>CARGO # ${cargoes}</h5>
+                                    <h5><fmt:message key="${cargo.type}"/></h5>
                                 </td>
                                 <td>
-                                        ${20 * cargoes} $
+                                    <fmt:formatNumber type="number" value="${cargo.minWeight}"/>
                                 </td>
                                 <td>
-                                        ${18 * cargoes} $
+                                    <fmt:formatNumber type="number" value="${cargo.maxWeight}"/>
                                 </td>
                                 <td>
-                                        ${16 * cargoes} $
-                                </td>
-                                <td>
-                                        ${10 * cargoes} $
+                                    $ <fmt:formatNumber type="number" value="${price}"/>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -72,10 +73,10 @@
                         <c:forEach var="direction" items="${requestScope.streetsListPage}">
                             <tr align="center">
                                 <td align="left">
-                                    <h5>${direction}</h5>
+                                    <h5>${direction.name}</h5>
                                 </td>
                                 <td>
-                                    1234
+                                    <h5><fmt:formatNumber type="number" value="${direction.distance}"/></h5>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -103,7 +104,7 @@
                     </c:if>
                     <c:if test="${requestScope.pageNum > 0}">
                         <p role="button" class="btn btn-primary pull-center">
-                                <font color="red"> ${requestScope.pageNum}</font>
+                            <font color="red"> ${requestScope.pageNum}</font>
                         </p>
                     </c:if>
                     <c:if test="${requestScope.pageNum + 1 <= requestScope.lastPage}">
@@ -116,7 +117,7 @@
                                 ${requestScope.pageNum + 2}
                         </a>
                     </c:if>
-                    <c:if test="${requestScope.pageNum <= requestScope.lastPage}">
+                    <c:if test="${requestScope.pageNum < requestScope.lastPage}">
                         <a href="?page=${requestScope.pageNum + 1}" role="button" class="btn btn-primary pull-center">
                             <fmt:message key="PAGE_NEXT"/>
                         </a>
@@ -131,7 +132,7 @@
             </font></h6>
 
         </div>
-        <div class="col-xs-3">
+        <div class="col-xs-2">
             <!--empty-->
         </div>
     </div>
