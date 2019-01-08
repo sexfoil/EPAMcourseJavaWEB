@@ -24,4 +24,8 @@ public class ServiceAddress extends AbstractService {
         dao.addAddress(address);
     }
 
+    public void updateAddress(Integer streetId, String build, String section, String apart, int userId) {
+        dao.updateAddress(streetId, build, section, apart, userId);
+    }
+
 }

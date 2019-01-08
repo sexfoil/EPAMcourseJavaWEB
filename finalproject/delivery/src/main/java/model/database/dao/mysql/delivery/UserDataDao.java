@@ -16,15 +16,13 @@ public class UserDataDao extends AbstractDAO {
     }
 
 
-    public void addUserData(UserData data) {
-        String query = buildInsertUserDataQuery(data);
-        try (Statement statement = connection.createStatement()) {
-            statement.executeUpdate(query);
-        } catch (SQLException e) {
-            // TODO
-            e.printStackTrace();
-        }
+    public void updateUserData(String cellNumber, int userId) {
+        executeUpdate(buildUpdateUserDataQuery(cellNumber, userId));
+    }
 
+
+    public void addUserData(UserData data) {
+        executeUpdate(buildInsertUserDataQuery(data));
     }
 
 
@@ -54,6 +52,16 @@ public class UserDataDao extends AbstractDAO {
     }
 
 
+    private void executeUpdate(String query) {
+        try (Statement statement = connection.createStatement()) {
+            statement.executeUpdate(query);
+        } catch (SQLException e) {
+            // TODO
+            e.printStackTrace();
+        }
+    }
+
+
     private String buildInsertUserDataQuery(UserData data) {
 
         StringBuilder query = new StringBuilder("insert into users_data ");
@@ -61,6 +69,16 @@ public class UserDataDao extends AbstractDAO {
         query.append(data.getUserId()).append(", '");
         query.append(data.getCellNumber()).append("', ");
         query.append(data.getUserId()).append(");");
+
+        System.out.println(query.toString());
+        return query.toString();
+    }
+
+    private String buildUpdateUserDataQuery(String cellNumber, int userId) {
+
+        StringBuilder query = new StringBuilder("update users_data set ");
+        query.append("cell_number='").append(cellNumber).append("' where ");
+        query.append("user_id=").append(userId).append(";");
 
         System.out.println(query.toString());
         return query.toString();

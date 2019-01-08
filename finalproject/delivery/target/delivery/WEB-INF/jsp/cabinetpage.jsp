@@ -10,7 +10,7 @@
             </div>
             <div class="col-xs-4" align="center">
                 <!--img src="../../img/menu/customerlogin.png" alt="customerlogin.png" class="img-responsive"-->
-                    ${requestScope.displayMain}SOME TEXT
+
             </div>
             <div class="col-xs-4">
                 <!--empty-->

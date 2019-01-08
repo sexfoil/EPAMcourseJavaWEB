@@ -24,4 +24,8 @@ public class ServiceUserData extends AbstractService {
         UserData data = new UserData(userId, number);
         dao.addUserData(data);
     }
+
+    public void updateUserData(String cellNumber, int userId) {
+        dao.updateUserData(cellNumber, userId);
+    }
 }

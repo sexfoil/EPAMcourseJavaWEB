@@ -16,15 +16,13 @@ public class AddressDao extends AbstractDAO {
     }
 
 
-    public void addAddress(Address address) {
-        String query = buildInsertAddressQuery(address);
-        try (Statement statement = connection.createStatement()) {
-            statement.executeUpdate(query);
-        } catch (SQLException e) {
-            // TODO
-            e.printStackTrace();
-        }
+    public void updateAddress(Integer streetId, String build, String section, String apart, int userId) {
+        executeUpdate(buildUpdateAddressQuery(streetId, build, section, apart, userId));
+    }
 
+
+    public void addAddress(Address address) {
+        executeUpdate(buildInsertAddressQuery(address));
     }
 
 
@@ -56,6 +54,16 @@ public class AddressDao extends AbstractDAO {
     }
 
 
+    private void executeUpdate(String query) {
+        try (Statement statement = connection.createStatement()) {
+            statement.executeUpdate(query);
+        } catch (SQLException e) {
+            // TODO
+            e.printStackTrace();
+        }
+    }
+
+
     private String buildInsertAddressQuery(Address address) {
 
         StringBuilder query = new StringBuilder("insert into addresses ");
@@ -65,6 +73,36 @@ public class AddressDao extends AbstractDAO {
         query.append(address.getBuilding()).append("', '");
         query.append(address.getSection()).append("', '");
         query.append(address.getApartment()).append("');");
+
+        System.out.println(query.toString());
+        return query.toString();
+    }
+
+    private String buildUpdateAddressQuery(Integer streetId, String build, String section, String apart, int userId) {
+
+        StringBuilder query = new StringBuilder("update addresses set ");
+        if (streetId != null) {
+            query.append("street_id=").append(streetId);
+            if (build != null || section != null || apart != null) {
+                query.append(", ");
+            }
+        }
+        if (build != null) {
+            query.append("building='").append(build).append("'");
+            if (section != null || apart != null) {
+                query.append(", ");
+            }
+        }
+        if (section != null) {
+            query.append("section='").append(section).append("'");
+            if (apart != null) {
+                query.append(", ");
+            }
+        }
+        if (apart != null) {
+            query.append("apartment='").append(apart).append("'");
+        }
+        query.append(" where user_id=").append(userId).append(";");
 
         System.out.println(query.toString());
         return query.toString();

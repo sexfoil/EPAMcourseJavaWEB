@@ -32,7 +32,6 @@ public class CabinetMainController extends HttpServlet {
         user = (User) session.getAttribute("user");
 
         if (user != null) {
-            setUserDataToSession(user.getId());
             getServletContext().getRequestDispatcher(Pages.CABINET_JSP.getUrl()).forward(req, resp);
         } else {
             resp.sendRedirect("/login");
@@ -48,25 +47,25 @@ public class CabinetMainController extends HttpServlet {
 //        redirect(req, resp, user);
 //
 //    }
-
-    private void setUserDataToSession(int userId) {
-        // TODO
-        Address userAddress =
-                ((ServiceAddress) DeliveryServiceFactory.getInstance().getService(DeliveryNames.ADDRESSES))
-                .getUserAddress(userId);
-
-        Street userStreet =
-                ((ServiceStreet) DeliveryServiceFactory.getInstance().getService(DeliveryNames.STREETS))
-                .getStreetById(userAddress.getStreetId());
-
-        UserData userData =
-                ((ServiceUserData) DeliveryServiceFactory.getInstance().getService(DeliveryNames.USERS_DATA))
-                .getUserData(userId);
-
-        session.setAttribute("userData", userData);
-        session.setAttribute("userAddress", userAddress);
-        session.setAttribute("userStreet", (userStreet == null ? "" : userStreet.getName()));
-
-    }
+//
+//    private void setUserDataToSession(int userId) {
+//        // TODO
+//        Address userAddress =
+//                ((ServiceAddress) DeliveryServiceFactory.getInstance().getService(DeliveryNames.ADDRESSES))
+//                .getUserAddress(userId);
+//
+//        Street userStreet =
+//                ((ServiceStreet) DeliveryServiceFactory.getInstance().getService(DeliveryNames.STREETS))
+//                .getStreetById(userAddress.getStreetId());
+//
+//        UserData userData =
+//                ((ServiceUserData) DeliveryServiceFactory.getInstance().getService(DeliveryNames.USERS_DATA))
+//                .getUserData(userId);
+//
+//        session.setAttribute("userData", userData);
+//        session.setAttribute("userAddress", userAddress);
+//        session.setAttribute("userStreet", (userStreet == null ? "" : userStreet.getName()));
+//
+//    }
 
 }
