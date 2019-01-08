@@ -19,37 +19,45 @@
                                 <td width="5%">
                                     NUMBER
                                 </td>
-                                <td width="50%">
+                                <td width="35%">
                                     CARGO
                                 </td>
                                 <td width="10%">
                                     COST
                                 </td>
+                                <td width="20%">
+                                    DATE
+                                </td>
                                 <td width="15%">
                                     STATUS
                                 </td>
-                                <td width="20%">
+                                <td width="15%">
                                     ACTION
                                 </td>
                             </tr>
                             </thead>
                             <tbody>
-                            <c:forEach var="direction" items="${requestScope.invoices}">
+                            <c:forEach var="invoice" items="${requestScope.userInvoices}">
                                 <tr align="center">
                                     <td>
-                                        <h5>${direction}</h5>
+                                        <h5>${invoice.id}</h5>
                                     </td>
                                     <td>
-                                        type
+                                        <h5>${invoice.cargoId}</h5>
                                     </td>
                                     <td>
-                                        100$
+                                        <h5>${invoice.cost*0.01}</h5>
                                     </td>
                                     <td>
-                                        order
+                                        <h5>${invoice.dateTime}</h5>
                                     </td>
                                     <td>
-                                        PAY!
+                                        <h5>${invoice.statusId}</h5>
+                                    </td>
+                                    <td>
+                                        <a href="?do=nothing" role="button" class="btn btn-primary pull-center">
+                                            DO SOMETHING
+                                        </a>
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -61,20 +69,17 @@
                             <a href="?page=1" role="button" class="btn btn-primary pull-center">
                                 FIRST
                             </a>
-                            <a href="?page=${requestScope.pageNum - 1}" role="button"
-                               class="btn btn-primary pull-center">
+                            <a href="?page=${requestScope.pageNum - 1}" role="button" class="btn btn-primary pull-center">
                                 <fmt:message key="PAGE_PREV"/>
                             </a>
                         </c:if>
                         <c:if test="${requestScope.pageNum - 2 > 0}">
-                            <a href="?page=${requestScope.pageNum - 2}" role="button"
-                               class="btn btn-primary pull-center">
+                            <a href="?page=${requestScope.pageNum - 2}" role="button" class="btn btn-primary pull-center">
                                     ${requestScope.pageNum - 2}
                             </a>
                         </c:if>
                         <c:if test="${requestScope.pageNum - 1 > 0}">
-                            <a href="?page=${requestScope.pageNum - 1}" role="button"
-                               class="btn btn-primary pull-center">
+                            <a href="?page=${requestScope.pageNum - 1}" role="button" class="btn btn-primary pull-center">
                                     ${requestScope.pageNum - 1}
                             </a>
                         </c:if>
@@ -84,20 +89,17 @@
                             </p>
                         </c:if>
                         <c:if test="${requestScope.pageNum + 1 <= requestScope.lastPage}">
-                            <a href="?page=${requestScope.pageNum + 1}" role="button"
-                               class="btn btn-primary pull-center">
+                            <a href="?page=${requestScope.pageNum + 1}" role="button" class="btn btn-primary pull-center">
                                     ${requestScope.pageNum + 1}
                             </a>
                         </c:if>
                         <c:if test="${requestScope.pageNum + 2 <= requestScope.lastPage}">
-                            <a href="?page=${requestScope.pageNum + 2}" role="button"
-                               class="btn btn-primary pull-center">
+                            <a href="?page=${requestScope.pageNum + 2}" role="button" class="btn btn-primary pull-center">
                                     ${requestScope.pageNum + 2}
                             </a>
                         </c:if>
-                        <c:if test="${requestScope.pageNum <= requestScope.lastPage}">
-                            <a href="?page=${requestScope.pageNum + 1}" role="button"
-                               class="btn btn-primary pull-center">
+                        <c:if test="${requestScope.pageNum < requestScope.lastPage}">
+                            <a href="?page=${requestScope.pageNum + 1}" role="button" class="btn btn-primary pull-center">
                                 <fmt:message key="PAGE_NEXT"/>
                             </a>
                             <a href="?page=${requestScope.lastPage}" role="button" class="btn btn-primary pull-center">

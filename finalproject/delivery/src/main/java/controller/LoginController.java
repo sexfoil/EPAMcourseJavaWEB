@@ -63,6 +63,7 @@ public class LoginController extends HttpServlet {
     private void redirect(HttpServletRequest req, HttpServletResponse resp, User user) throws IOException, ServletException {
 
         if (user != null) {
+            session.setAttribute("updateInvoices", true);
             resp.sendRedirect("/cabinet");
         } else {
             getServletContext().getRequestDispatcher(Pages.LOGIN_JSP.getUrl()).forward(req, resp);

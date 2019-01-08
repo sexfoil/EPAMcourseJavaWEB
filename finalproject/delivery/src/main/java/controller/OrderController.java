@@ -1,6 +1,7 @@
 package controller;
 
 import model.entity.Address;
+import model.entity.Cargo;
 import model.entity.CargoType;
 import model.entity.Street;
 import model.entity.user.User;
@@ -46,6 +47,7 @@ public class OrderController extends HttpServlet {
 
         if (isInputValid) {
             createInvoice(formParams, req);
+            session.setAttribute("updateInvoices", true);
         }
 
         redirect(req, resp);
@@ -81,14 +83,19 @@ public class OrderController extends HttpServlet {
             double currentPriceRate = (double) session.getAttribute("currentPriceRate");
             double cost = Calculator.calculateCost(cargoType, street, currentPriceRate);
 
+            ServiceCargo serviceCargo = (ServiceCargo) DeliveryServiceFactory.getInstance()
+                    .getService(DeliveryNames.CARGOES);
+            long cargoId = System.currentTimeMillis();
+            Cargo cargo = new Cargo(cargoId, cargoType, weight);
+            serviceCargo.addCargo(cargo);
 
             ServiceInvoice serviceInvoice = (ServiceInvoice) DeliveryServiceFactory.getInstance()
                     .getService(DeliveryNames.INVOICES);
 
-            // todo save
-            Timestamp timestamp = Timestamp.valueOf(dateTime);
+            serviceInvoice.saveInvoice(user.getId(), cargoId, (int) cost * 100, dateTime, 1);
 
-            System.out.println(timestamp);
+            updateUserDataInSession();
+
         }
 
     }
@@ -119,25 +126,9 @@ public class OrderController extends HttpServlet {
 
 
 
-    private void updateUserDataInSession(int userId) {
-
-        Address userAddress =
-                ((ServiceAddress) DeliveryServiceFactory.getInstance().getService(DeliveryNames.ADDRESSES))
-                        .getUserAddress(userId);
-
-        Street userStreet =
-                ((ServiceStreet) DeliveryServiceFactory.getInstance().getService(DeliveryNames.STREETS))
-                        .getStreetById(userAddress.getStreetId());
-
-        UserData userData =
-                ((ServiceUserData) DeliveryServiceFactory.getInstance().getService(DeliveryNames.USERS_DATA))
-                        .getUserData(userId);
-
-        session.setAttribute("userData", userData);
-        session.setAttribute("userAddress", userAddress);
-        session.setAttribute("userStreet", userStreet.getName());
-        //session.setAttribute("userStreet", (userStreet == null ? "" : userStreet.getName()));
-
+    private void updateUserDataInSession() {
+        int activeInvoices = (int) session.getAttribute("activeInvoiceAmount");
+        session.setAttribute("activeInvoiceAmount", ++activeInvoices);
     }
 
 
@@ -146,7 +137,7 @@ public class OrderController extends HttpServlet {
         if (user == null) {
             resp.sendRedirect("/login");
         } else {
-            updateUserDataInSession(user.getId());
+            //updateUserDataInSession(user.getId());
             getServletContext().getRequestDispatcher(Pages.ORDER_JSP.getUrl()).forward(req, resp);
         }
 

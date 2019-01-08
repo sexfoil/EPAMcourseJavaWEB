@@ -26,6 +26,7 @@ public class HomeController extends HttpServlet {
                 session.setAttribute("userData", null);
                 session.setAttribute("userAddress", null);
                 session.setAttribute("userStreet", null);
+                session.setAttribute("activeInvoiceAmount", 0);
 
                 ((HashSet<String>) getServletContext().getAttribute("usersPool")).remove(user.getLogin());
             }

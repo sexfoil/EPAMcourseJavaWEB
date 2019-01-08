@@ -6,12 +6,12 @@ public class Invoice {
 
     private int id;
     private int userId;
-    private int cargoId;
+    private long cargoId;
     private int cost;
     private LocalDateTime dateTime;
     private int statusId;
 
-    public Invoice(int id, int userId, int cargoId, int cost, LocalDateTime dateTime, int statusId) {
+    public Invoice(int id, int userId, long cargoId, int cost, LocalDateTime dateTime, int statusId) {
         this.id = id;
         this.userId = userId;
         this.cargoId = cargoId;
@@ -36,11 +36,11 @@ public class Invoice {
         this.userId = userId;
     }
 
-    public int getCargoId() {
+    public long getCargoId() {
         return cargoId;
     }
 
-    public void setCargoId(int cargoId) {
+    public void setCargoId(long cargoId) {
         this.cargoId = cargoId;
     }
 

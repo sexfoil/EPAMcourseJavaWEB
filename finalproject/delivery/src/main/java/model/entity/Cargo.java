@@ -2,22 +2,22 @@ package model.entity;
 
 public class Cargo {
 
-    private int id;
+    private long id;
     private CargoType type;
     private int weight;
 
 
-    public Cargo(int id, CargoType type, int weight) {
+    public Cargo(long id, CargoType type, int weight) {
         this.id = id;
         this.type = type;
         this.weight = weight;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

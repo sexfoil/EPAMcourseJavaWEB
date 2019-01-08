@@ -5,6 +5,7 @@ import model.entity.Status;
 import model.entity.Street;
 import service.Language;
 import service.delivery.ServiceCargoTypes;
+import service.delivery.ServiceInvoice;
 import service.delivery.ServiceStatus;
 import service.delivery.ServiceStreet;
 import service.factory.DeliveryServiceFactory;
@@ -84,6 +85,8 @@ public class InitFilter implements Filter {
                 .getService(DeliveryNames.STATUS);
         List<Status> statuses = serviceStatus.getAllStatuses();
         session.setAttribute("deliveryStatuses", statuses);
+
+        session.setAttribute("activeInvoiceAmount", 0);
     }
 
     private void initPriceParams() {

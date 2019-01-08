@@ -31,6 +31,10 @@ public class PaymentController extends HttpServlet {
         session = req.getSession();
         user = (User) session.getAttribute("user");
 
+        // todo active invoices
+
+        session.setAttribute("updateInvoices", true);
+
         redirect(req, resp, user);
 
     }

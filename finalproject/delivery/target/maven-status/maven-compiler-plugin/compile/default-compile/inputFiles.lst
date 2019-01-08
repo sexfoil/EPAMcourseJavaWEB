@@ -28,7 +28,6 @@ D:\_EPAM_\CourseRepo\finalproject\delivery\src\main\java\model\database\dao\mysq
 D:\_EPAM_\CourseRepo\finalproject\delivery\src\main\java\service\delivery\ServiceStatus.java
 D:\_EPAM_\CourseRepo\finalproject\delivery\src\main\java\controller\CabinetSettingsController.java
 D:\_EPAM_\CourseRepo\finalproject\delivery\src\main\java\utility\DeliveryNames.java
-D:\_EPAM_\CourseRepo\finalproject\delivery\src\main\java\utility\filters\CabinetFilter.java
 D:\_EPAM_\CourseRepo\finalproject\delivery\src\main\java\model\database\dao\Dao.java
 D:\_EPAM_\CourseRepo\finalproject\delivery\src\main\java\utility\tools\LanguageManager.java
 D:\_EPAM_\CourseRepo\finalproject\delivery\src\main\java\model\entity\Status.java
@@ -49,4 +48,5 @@ D:\_EPAM_\CourseRepo\finalproject\delivery\src\main\java\utility\Pages.java
 D:\_EPAM_\CourseRepo\finalproject\delivery\src\main\java\service\AbstractService.java
 D:\_EPAM_\CourseRepo\finalproject\delivery\src\main\java\model\database\dao\factory\AbstractDaoFactory.java
 D:\_EPAM_\CourseRepo\finalproject\delivery\src\main\java\service\delivery\ServiceUser.java
+D:\_EPAM_\CourseRepo\finalproject\delivery\src\main\java\utility\filters\UserFilter.java
 D:\_EPAM_\CourseRepo\finalproject\delivery\src\main\java\model\database\dao\mysql\delivery\AddressDao.java

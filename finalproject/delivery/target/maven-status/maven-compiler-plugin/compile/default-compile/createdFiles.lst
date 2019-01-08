@@ -14,7 +14,6 @@ model\database\dao\mysql\delivery\CargoDao.class
 utility\filters\LanguageFilter.class
 controller\InfoPricesController.class
 model\entity\user\User.class
-utility\filters\CabinetFilter.class
 model\entity\Cargo.class
 model\database\dao\factory\AbstractDaoFactory.class
 model\database\dao\mysql\delivery\UserDataDao.class
@@ -44,6 +43,7 @@ model\entity\Status.class
 service\delivery\ServiceCargo.class
 utility\tools\Validator.class
 model\database\dao\factory\DeliveryMySQLDaoFactory.class
+utility\filters\UserFilter.class
 utility\tools\Calculator.class
 model\database\dao\connection\ConnectionPoolMysqlDelivery.class
 service\delivery\ServiceUser.class
