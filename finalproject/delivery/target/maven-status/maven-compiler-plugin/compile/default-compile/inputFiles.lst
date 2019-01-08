@@ -1,6 +1,8 @@
+D:\_EPAM_\CourseRepo\finalproject\delivery\src\main\java\utility\tools\Calculator.java
 D:\_EPAM_\CourseRepo\finalproject\delivery\src\main\java\utility\filters\InitFilter.java
 D:\_EPAM_\CourseRepo\finalproject\delivery\src\main\java\model\entity\user\UserData.java
 D:\_EPAM_\CourseRepo\finalproject\delivery\src\main\java\model\entity\Invoice.java
+D:\_EPAM_\CourseRepo\finalproject\delivery\src\main\java\utility\tools\Validator.java
 D:\_EPAM_\CourseRepo\finalproject\delivery\src\main\java\controller\OrderController.java
 D:\_EPAM_\CourseRepo\finalproject\delivery\src\main\java\model\entity\Cargo.java
 D:\_EPAM_\CourseRepo\finalproject\delivery\src\main\java\model\database\dao\mysql\delivery\InvoiceDao.java
@@ -17,8 +19,8 @@ D:\_EPAM_\CourseRepo\finalproject\delivery\src\main\java\service\factory\Deliver
 D:\_EPAM_\CourseRepo\finalproject\delivery\src\main\java\model\database\dao\mysql\delivery\UserDao.java
 D:\_EPAM_\CourseRepo\finalproject\delivery\src\main\java\service\delivery\ServiceCargoTypes.java
 D:\_EPAM_\CourseRepo\finalproject\delivery\src\main\java\model\database\dao\mysql\delivery\UserDataDao.java
-D:\_EPAM_\CourseRepo\finalproject\delivery\src\main\java\controller\InfoMainController.java
 D:\_EPAM_\CourseRepo\finalproject\delivery\src\main\java\controller\InfoPricesController.java
+D:\_EPAM_\CourseRepo\finalproject\delivery\src\main\java\controller\PaymentController.java
 D:\_EPAM_\CourseRepo\finalproject\delivery\src\main\java\model\entity\user\User.java
 D:\_EPAM_\CourseRepo\finalproject\delivery\src\main\java\controller\InfoDirectionsController.java
 D:\_EPAM_\CourseRepo\finalproject\delivery\src\main\java\service\delivery\ServiceCargo.java
@@ -28,6 +30,8 @@ D:\_EPAM_\CourseRepo\finalproject\delivery\src\main\java\controller\CabinetSetti
 D:\_EPAM_\CourseRepo\finalproject\delivery\src\main\java\utility\DeliveryNames.java
 D:\_EPAM_\CourseRepo\finalproject\delivery\src\main\java\utility\filters\CabinetFilter.java
 D:\_EPAM_\CourseRepo\finalproject\delivery\src\main\java\model\database\dao\Dao.java
+D:\_EPAM_\CourseRepo\finalproject\delivery\src\main\java\utility\tools\LanguageManager.java
+D:\_EPAM_\CourseRepo\finalproject\delivery\src\main\java\model\entity\Status.java
 D:\_EPAM_\CourseRepo\finalproject\delivery\src\main\java\controller\LoginController.java
 D:\_EPAM_\CourseRepo\finalproject\delivery\src\main\java\model\entity\Address.java
 D:\_EPAM_\CourseRepo\finalproject\delivery\src\main\java\model\database\dao\mysql\delivery\StreetDao.java
@@ -44,7 +48,5 @@ D:\_EPAM_\CourseRepo\finalproject\delivery\src\main\java\utility\filters\Languag
 D:\_EPAM_\CourseRepo\finalproject\delivery\src\main\java\utility\Pages.java
 D:\_EPAM_\CourseRepo\finalproject\delivery\src\main\java\service\AbstractService.java
 D:\_EPAM_\CourseRepo\finalproject\delivery\src\main\java\model\database\dao\factory\AbstractDaoFactory.java
-D:\_EPAM_\CourseRepo\finalproject\delivery\src\main\java\utility\Validator.java
 D:\_EPAM_\CourseRepo\finalproject\delivery\src\main\java\service\delivery\ServiceUser.java
-D:\_EPAM_\CourseRepo\finalproject\delivery\src\main\java\utility\LanguageManager.java
 D:\_EPAM_\CourseRepo\finalproject\delivery\src\main\java\model\database\dao\mysql\delivery\AddressDao.java

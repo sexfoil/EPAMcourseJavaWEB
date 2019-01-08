@@ -1,6 +1,7 @@
 package service.delivery;
 
 import model.database.dao.mysql.delivery.StatusDao;
+import model.entity.Status;
 import service.AbstractService;
 import utility.DeliveryNames;
 
@@ -15,7 +16,7 @@ public class ServiceStatus extends AbstractService {
         dao = (StatusDao) abstractDAO;
     }
 
-    public List<String> getAllStatuses() {
+    public List<Status> getAllStatuses() {
         return dao.getAll();
     }
 

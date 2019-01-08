@@ -1,7 +1,7 @@
 package utility.filters;
 
 import service.Language;
-import utility.LanguageManager;
+import utility.tools.LanguageManager;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;

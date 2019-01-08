@@ -29,9 +29,9 @@
                         <tr>
                             <td colspan="2" align="center">
                                 <h4>
-                                    <c:if test="${sessionScope.calculatedCargo != null}">
-                                        <fmt:message key="${sessionScope.calculatedCargo}"/><br>
-                                        $ <fmt:formatNumber type="number" value="${sessionScope.calculatedCost}"/>
+                                    <c:if test="${requestScope.calculatedCargo != null}">
+                                        <fmt:message key="${requestScope.calculatedCargo}"/><br>
+                                        $ <fmt:formatNumber type="number" value="${requestScope.calculatedCost}"/>
                                     </c:if>
                                 </h4>
                             </td>
@@ -42,8 +42,8 @@
                             </td>
                             <td>
                                 <input type="number" min="1" step="1" name="weight"
-                                       placeholder="weight" value="${sessionScope.oldWeight}" required/>
-                                <h5><font color="red">${sessionScope.weightError}</font></h5>
+                                       placeholder="weight" value="${requestScope.oldWeight}" required/>
+                                <h5><font color="red">${requestScope.weightError}</font></h5>
                             </td>
                         </tr>
                         <tr>
@@ -52,20 +52,10 @@
                             </td>
                             <td>
                                 <input list="streetsNamesFromDB" name="street" placeholder="street"
-                                       value="${sessionScope.oldStreet.name}" required/>
-                                <h5><font color="red">${sessionScope.streetError}</font></h5>
+                                       value="${requestScope.oldStreet.name}" required/>
+                                <h5><font color="red">${requestScope.streetError}</font></h5>
                             </td>
                         </tr>
-                        <!--tr>
-                            <td>
-                                <img src="../../img/menu/reg_email.png" alt="reg_email.png">
-                            </td>
-                            <td>
-                                <input type="datetime-local" name="date" placeholder="street"
-                                        value="${requestScope.oldDate}"/>
-                                <h5><font color="red">${requestScope.dateError}</font></h5>
-                            </td>
-                        </tr-->
                         <tr>
                             <td colspan="2" align="center">
                                 <input type="submit" value="<fmt:message key="BODY_BTN_COMPUTE"/>"

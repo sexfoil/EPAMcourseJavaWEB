@@ -1,6 +1,7 @@
 package model.database.dao.mysql.delivery;
 
 import model.database.dao.AbstractDAO;
+import model.entity.Status;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -16,12 +17,16 @@ public class StatusDao extends AbstractDAO {
     }
 
     @Override
-    public List<String> getAll() {
-        List<String> status = new ArrayList<>();
+    public List<Status> getAll() {
+        List<Status> status = new ArrayList<>();
         try (Statement statement = connection.createStatement()) {
-            ResultSet result = statement.executeQuery("select status_name from delivery_status;");
+            ResultSet result = statement.executeQuery("select * from delivery_status;");
             while(result.next()) {
-                status.add(result.getString("status_name"));
+                status.add(new Status(
+                        result.getInt("id"),
+                        result.getString("status_name")
+                        )
+                );
             }
         } catch (SQLException e) {
             e.printStackTrace();

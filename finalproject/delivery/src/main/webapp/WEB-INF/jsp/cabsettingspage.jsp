@@ -19,7 +19,7 @@
 
                 <!--img src="../../img/menu/customerlogin.png" alt="customerlogin.png" class="img-responsive"-->
                 <a href="/cabinet" role="button" class="btn btn-primary pull-center">
-                    BACK TO CABINET <fmt:message key="BODY_BTN_SET"/>
+                    <fmt:message key="NAV_MENU_CABINET"/>
                 </a>
 
                 <h4>

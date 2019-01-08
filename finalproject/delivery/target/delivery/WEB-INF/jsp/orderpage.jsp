@@ -1,10 +1,17 @@
 <%@ include file="header.jsp" %>
 
 <datalist id="streetsNamesFromDB">
-    <c:forEach var="streetName" items="${requestScope.streetsList}">
-    <option value="${streetName}">
+    <c:forEach var="streetName" items="${sessionScope.streetsList}">
+    <option value="${streetName.name}">
         </c:forEach>
 </datalist>
+
+<datalist id="cargoTypesFromDB">
+    <c:forEach var="cargo" items="${sessionScope.cargoTypes}">
+    <option value="${cargo.type}">
+        </c:forEach>
+</datalist>
+
 
 <c:if test="${sessionScope.user != null}">
     <!-- Empty block -->
@@ -38,21 +45,12 @@
                     <table border="1">
                         <tr>
                             <td>
-                                <img src="../../img/menu/reg_name.png" alt="reg_name.png">
-                            </td>
-                            <td>
-                                <input type="text" name="cargoType" value="${requestScope.prevFirstName}"
-                                       placeholder="type"/><br>
-                                <h5><font color="red">${requestScope.nameError}</font></h5>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
                                 <img src="../../img/menu/reg_pass.png" alt="reg_pass.png">
                             </td>
                             <td>
-                                <input type="number" step="0.001" name="weight" value="0" placeholder="weight"/>
-                                <h5><font color="red">${requestScope.passError}</font></h5>
+                                <input type="number" min="1" step="1" name="weight"
+                                       placeholder="weight" value="${requestScope.oldWeight}" required/>
+                                <h5><font color="red">${requestScope.weightError}</font></h5>
                             </td>
                         </tr>
                         <tr>
@@ -60,8 +58,9 @@
                                 <img src="../../img/menu/reg_email.png" alt="reg_email.png">
                             </td>
                             <td>
-                                <input list="streetsNamesFromDB" name="street" placeholder="street"/>
-                                <h5><font color="red">${requestScope.passError}</font></h5>
+                                <input list="streetsNamesFromDB" name="street" placeholder="street"
+                                       value="${requestScope.oldStreet.name}" required/>
+                                <h5><font color="red">${requestScope.streetError}</font></h5>
                             </td>
                         </tr>
                         <tr>
@@ -69,17 +68,19 @@
                                 <img src="../../img/menu/reg_email.png" alt="reg_email.png">
                             </td>
                             <td>
-                                <input type="date" name="date" value="${requestScope.prevEmail}" placeholder="street"/>
-                                <h5><font color="red">${requestScope.emailError}</font></h5>
+                                <input type="datetime-local" name="date" placeholder="street"
+                                       value="${requestScope.oldDate}"/>
+                                <h5><font color="red">${requestScope.dateError}</font></h5>
                             </td>
                         </tr>
+                        <tr>
+                            <td colspan="2" align="center">
+                                <input type="submit" value="<fmt:message key="NAV_MENU_CREATE"/>"
+                                       role="button" class="btn btn-primary pull-center"/>
+                            </td>
+                        </tr>
+
                     </table>
-
-                    <br>
-                    <br>
-
-                    <input type="submit" value="<fmt:message key="NAV_MENU_CREATE"/>"
-                           role="button" class="btn btn-primary pull-center"/><br>
 
                 </form>
                 <br>
@@ -87,12 +88,16 @@
 
                 <div class="btn-toolbar text-center">
 
-                    <a href="/cabinet" role="button" class="btn btn-primary pull-center">
-                        <fmt:message key="NAV_MENU_HOME"/>
+                    <a href="/info_prices" role="button" class="btn btn-primary pull-center">
+                        <fmt:message key="NAV_MENU_PRICES"/>
                     </a>
 
-                    <a href="/cabinet_history" role="button" class="btn btn-primary pull-center">
-                        <fmt:message key="NAV_MENU_HISTORY"/>
+                    <a href="/info_directions" role="button" class="btn btn-primary pull-center">
+                        <fmt:message key="NAV_MENU_DIRECTIONS"/>
+                    </a>
+
+                    <a href="/cabinet" role="button" class="btn btn-primary pull-center">
+                        <fmt:message key="NAV_MENU_CABINET"/>
                     </a>
 
                 </div>

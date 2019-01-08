@@ -44,12 +44,6 @@ public class UserDao extends AbstractDAO {
         return true;
     }
 
-    @Override
-    public List getAll() {
-        return null;
-    }
-
-
     private User getUser(ResultSet result) throws SQLException {
         User user = null;
         if(result.next()) {
@@ -67,6 +61,13 @@ public class UserDao extends AbstractDAO {
         }
         return user;
     }
+
+
+    @Override
+    public List getAll() {
+        return null;
+    }
+
 
 
     private String buildInsertUserQuery(User user) {

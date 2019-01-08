@@ -9,7 +9,8 @@ public enum Pages {
     INFO_JSP("infopage.jsp"),
     LOGIN_JSP("loginpage.jsp"),
     ORDER_JSP("orderpage.jsp"),
-    REGISTER_JSP("registerpage.jsp");
+    REGISTER_JSP("registerpage.jsp"),
+    PAYMENT_JSP("paymentpage.jsp");
 
     private String url;
     private String path = "/WEB-INF/jsp/";

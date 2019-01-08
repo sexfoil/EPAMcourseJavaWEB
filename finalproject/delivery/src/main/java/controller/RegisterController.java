@@ -1,15 +1,12 @@
 package controller;
 
 import model.entity.user.User;
-import model.entity.user.UserData;
 import service.delivery.ServiceAddress;
-import service.delivery.ServiceStreet;
 import service.delivery.ServiceUser;
 import service.delivery.ServiceUserData;
 import service.factory.DeliveryServiceFactory;
 import utility.DeliveryNames;
 import utility.Pages;
-import utility.Validator;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

@@ -23,49 +23,21 @@ import java.io.IOException;
 @WebServlet (name = "cabinetServlet", urlPatterns = "/cabinet")
 public class CabinetMainController extends HttpServlet {
 
-    private HttpSession session = null;
-    private User user = null;
+    //private HttpSession session = null;
+    //private User user = null;
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        session = req.getSession();
-        user = (User) session.getAttribute("user");
+        //session = req.getSession();
+        //user = (User) session.getAttribute("user");
 
-        if (user != null) {
+        //if (user != null) {
+        if (req.getSession().getAttribute("user") != null) {
             getServletContext().getRequestDispatcher(Pages.CABINET_JSP.getUrl()).forward(req, resp);
         } else {
             resp.sendRedirect("/login");
         }
 
     }
-
-//    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//
-//        System.out.println("MAIN POST");
-//        session = req.getSession();
-//        session.setAttribute("user", user);
-//        redirect(req, resp, user);
-//
-//    }
-//
-//    private void setUserDataToSession(int userId) {
-//        // TODO
-//        Address userAddress =
-//                ((ServiceAddress) DeliveryServiceFactory.getInstance().getService(DeliveryNames.ADDRESSES))
-//                .getUserAddress(userId);
-//
-//        Street userStreet =
-//                ((ServiceStreet) DeliveryServiceFactory.getInstance().getService(DeliveryNames.STREETS))
-//                .getStreetById(userAddress.getStreetId());
-//
-//        UserData userData =
-//                ((ServiceUserData) DeliveryServiceFactory.getInstance().getService(DeliveryNames.USERS_DATA))
-//                .getUserData(userId);
-//
-//        session.setAttribute("userData", userData);
-//        session.setAttribute("userAddress", userAddress);
-//        session.setAttribute("userStreet", (userStreet == null ? "" : userStreet.getName()));
-//
-//    }
 
 }

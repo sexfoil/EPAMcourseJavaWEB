@@ -5,10 +5,10 @@
 
     <div class="jumbotron">
         <div class="container">
-            <div class="col-xs-3">
+            <div class="col-xs-2">
                 <!--empty-->
             </div>
-            <div class="col-xs-6" align="center">
+            <div class="col-xs-8" align="center">
                 <!--img src="../../img/menu/customerlogin.png" alt="customerlogin.png" class="img-responsive"-->
                 <h6><font color="orange">
 
@@ -16,28 +16,40 @@
                         <table border="1" width="100%">
                             <thead align="center">
                             <tr>
-                                <td width="40%">
+                                <td width="5%">
                                     NUMBER
                                 </td>
-                                <td width="30%">
-                                    ACTION
+                                <td width="50%">
+                                    CARGO
                                 </td>
-                                <td width="30%">
+                                <td width="10%">
+                                    COST
+                                </td>
+                                <td width="15%">
                                     STATUS
+                                </td>
+                                <td width="20%">
+                                    ACTION
                                 </td>
                             </tr>
                             </thead>
                             <tbody>
-                            <c:forEach var="direction" items="${requestScope.streetsListPage}">
+                            <c:forEach var="direction" items="${requestScope.invoices}">
                                 <tr align="center">
-                                    <td align="left">
+                                    <td>
                                         <h5>${direction}</h5>
                                     </td>
                                     <td>
-                                        1234
+                                        type
                                     </td>
                                     <td>
-                                        1234
+                                        100$
+                                    </td>
+                                    <td>
+                                        order
+                                    </td>
+                                    <td>
+                                        PAY!
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -49,17 +61,20 @@
                             <a href="?page=1" role="button" class="btn btn-primary pull-center">
                                 FIRST
                             </a>
-                            <a href="?page=${requestScope.pageNum - 1}" role="button" class="btn btn-primary pull-center">
+                            <a href="?page=${requestScope.pageNum - 1}" role="button"
+                               class="btn btn-primary pull-center">
                                 <fmt:message key="PAGE_PREV"/>
                             </a>
                         </c:if>
                         <c:if test="${requestScope.pageNum - 2 > 0}">
-                            <a href="?page=${requestScope.pageNum - 2}" role="button" class="btn btn-primary pull-center">
+                            <a href="?page=${requestScope.pageNum - 2}" role="button"
+                               class="btn btn-primary pull-center">
                                     ${requestScope.pageNum - 2}
                             </a>
                         </c:if>
                         <c:if test="${requestScope.pageNum - 1 > 0}">
-                            <a href="?page=${requestScope.pageNum - 1}" role="button" class="btn btn-primary pull-center">
+                            <a href="?page=${requestScope.pageNum - 1}" role="button"
+                               class="btn btn-primary pull-center">
                                     ${requestScope.pageNum - 1}
                             </a>
                         </c:if>
@@ -69,17 +84,20 @@
                             </p>
                         </c:if>
                         <c:if test="${requestScope.pageNum + 1 <= requestScope.lastPage}">
-                            <a href="?page=${requestScope.pageNum + 1}" role="button" class="btn btn-primary pull-center">
+                            <a href="?page=${requestScope.pageNum + 1}" role="button"
+                               class="btn btn-primary pull-center">
                                     ${requestScope.pageNum + 1}
                             </a>
                         </c:if>
                         <c:if test="${requestScope.pageNum + 2 <= requestScope.lastPage}">
-                            <a href="?page=${requestScope.pageNum + 2}" role="button" class="btn btn-primary pull-center">
+                            <a href="?page=${requestScope.pageNum + 2}" role="button"
+                               class="btn btn-primary pull-center">
                                     ${requestScope.pageNum + 2}
                             </a>
                         </c:if>
                         <c:if test="${requestScope.pageNum <= requestScope.lastPage}">
-                            <a href="?page=${requestScope.pageNum + 1}" role="button" class="btn btn-primary pull-center">
+                            <a href="?page=${requestScope.pageNum + 1}" role="button"
+                               class="btn btn-primary pull-center">
                                 <fmt:message key="PAGE_NEXT"/>
                             </a>
                             <a href="?page=${requestScope.lastPage}" role="button" class="btn btn-primary pull-center">
@@ -93,117 +111,46 @@
                 </font></h6>
 
             </div>
-            <div class="col-xs-3">
+            <div class="col-xs-2">
                 <!--empty-->
             </div>
         </div>
     </div>
 
-    <c:choose>
-        <c:when test="${sessionScope.cabinetPage == history}" >
-            <div class="jumbotron">
-                <div class="container">
-                    <div class="col-xs-4">
-                        <!--empty-->
-                    </div>
-                    <div class="col-xs-4" align="center">
-                        SHOW HISTORY (Page=${sessionScope.cabinetPage})
-                        <br>
+
+    <!-- Thumbnails -->
+    <div class="container thumbs">
+        <div class="col-sm-3 col-md-3">
+            <!--empty-->
+        </div>
+        <div class="col-sm-6 col-md-6">
+            <div class="thumbnail">
+                <!--img src="../../img/menu/prices.png" alt="prices.png" class="img-responsive"-->
+                <div class="caption" align="center">
+                    <h3 class=""><fmt:message key="NAV_MENU_HISTORY"/></h3>
+                    <p></p>
+                    <div class="btn-toolbar text-center">
+                        <a href="/home" role="button" class="btn btn-primary pull-center">
+                            <fmt:message key="NAV_MENU_HOME"/>
+                        </a>
+
+                        <a href="/order" role="button" class="btn btn-primary pull-center">
+                            <fmt:message key="NAV_MENU_CREATE"/>
+                        </a>
+
                         <a href="/cabinet" role="button" class="btn btn-primary pull-center">
-                            BACK <fmt:message key="BODY_BTN_GET" />
+                            <fmt:message key="NAV_MENU_CABINET"/>
                         </a>
                     </div>
-                    <div class="col-xs-4">
-                        <!--empty-->
-                    </div>
                 </div>
             </div>
-        </c:when>
-        <c:when test="${sessionScope.cabinetPage == settings}" >
-            <div class="jumbotron">
-                <div class="container">
-                    <div class="col-xs-4">
-                        <!--empty-->
-                    </div>
-                    <div class="col-xs-4" align="center">
-                        SHOW SETTINGS
-                        <br>
-                        <a href="/cabinet" role="button" class="btn btn-primary pull-center">
-                            BACK <fmt:message key="BODY_BTN_SET" />
-                        </a>
-                    </div>
-                    <div class="col-xs-4">
-                        <!--empty-->
-                    </div>
-                </div>
-            </div>
-        </c:when>
-        <c:otherwise>
+        </div>
+        <div class="col-sm-3 col-md-3">
+            <!--empty-->
+        </div>
+    </div>
+    <!-- End Thumbnails -->
 
-            <c:set var="displayMain" value="true" scope="request" />
-            <!-- Thumbnails -->
-            <div class="container thumbs">
-                <div class="col-sm-4 col-md-4">
-                    <div class="thumbnail">
-                        <img src="../../img/menu/ordering.png" alt="info" class="img-responsive">
-                        <div class="caption" align="center">
-                            <h3 class=""><fmt:message key="NAV_MENU_CREATE" /></h3>
-                            <p>Create new order...</p>
-                            <div class="btn-toolbar text-center">
-                                <a href="/order" role="button" class="btn btn-primary pull-center">
-                                    <fmt:message key="BODY_BTN_ACT" />
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4 col-md-4">
-                    <div class="thumbnail">
-                        <img src="../../img/menu/myorders.png" alt="calc" class="img-responsive">
-                        <div class="caption" align="center">
-                            <h3 class=""><fmt:message key="NAV_MENU_HISTORY" /></h3>
-                            <p>View my orders...</p>
-                            <div class="btn-toolbar text-center">
-                                <form action="" method="get">
-                                    <input type="hidden" name="page" value="history" />
-
-                                    <input role="button" class="btn btn-primary pull-center"
-                                           type="submit" value="<fmt:message key="BODY_BTN_GET" />" />
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4 col-md-4">
-                    <div class="thumbnail">
-                        <img src="../../img/menu/settings.png" alt="order" class="img-responsive">
-                        <div class="caption" align="center">
-                            <h3 class=""><fmt:message key="NAV_MENU_SETTINGS" /></h3>
-                            <p>Change some data...</p>
-                            <div class="btn-toolbar text-center">
-                                <form action="" method="get">
-                                    <input type="hidden" name="page" value="settings" />
-
-                                    <input role="button" class="btn btn-primary pull-center"
-                                           type="submit" value="<fmt:message key="BODY_BTN_SET" />" />
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- End Thumbnails -->
-
-            <div align="center">
-                <h2><font color="blue">Welcome ${sessionScope.user.login}!</font></h2>
-                <h3><font color="blue">Name: ${sessionScope.user.firstName} ${sessionScope.user.lastName}</font></h3>
-                <h3><font color="blue">Cabinet: ${sessionScope.cabinetPage}</font></h3>
-                <h3><font color="blue">History: ${pageScope.history}</font></h3>
-                <h3><font color="blue">E-mail: ${sessionScope.user.userData.eMail}</font></h3>
-            </div>
-
-        </c:otherwise>
-    </c:choose>
 
 </c:if>
 

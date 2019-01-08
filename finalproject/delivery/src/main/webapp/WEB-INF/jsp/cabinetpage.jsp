@@ -44,7 +44,7 @@
                     <p>View my orders...</p>
                     <div class="btn-toolbar text-center">
                         <a href="/cabinet_history" role="button" class="btn btn-primary pull-center">
-                            <fmt:message key="BODY_BTN_SET"/>
+                            <fmt:message key="BODY_BTN_GET"/>
                         </a>
                     </div>
                 </div>
