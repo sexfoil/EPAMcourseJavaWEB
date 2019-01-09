@@ -60,31 +60,4 @@ public class CalculatorController extends HttpServlet {
 
     }
 
-
-//    private double getCalculatedCost(CargoType cargoType, Street street) {
-//        int typeRate = cargoType.getRate();
-//        int distance = street.getDistance();
-//        double currentPriceRate = (double) session.getAttribute("currentPriceRate");
-//
-//        return typeRate * distance * currentPriceRate;
-//    }
-//
-
-//    private CargoType getCargoType(List<CargoType> cargoTypes, int weight) {
-//
-//        Optional<CargoType> matchingType = cargoTypes.stream()
-//                .filter(cargo -> weight > cargo.getMinWeight() && weight <= cargo.getMaxWeight()).findFirst();
-//
-//        return matchingType.orElse(null);
-//    }
-//
-
-//    private Street getStreet(List<Street> streets, String name) {
-//
-//        Optional<Street> matchingStreet = streets.stream().filter(n -> name.equals(n.getName())).findFirst();
-//
-//        return matchingStreet.orElse(null);
-//
-//    }
-
 }

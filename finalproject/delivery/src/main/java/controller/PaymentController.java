@@ -3,14 +3,13 @@ package controller;
 import model.entity.Cargo;
 import model.entity.Invoice;
 import model.entity.user.User;
-import model.entity.user.UserData;
+import org.apache.log4j.Logger;
 import service.delivery.ServiceCargo;
 import service.delivery.ServiceInvoice;
 import service.factory.DeliveryServiceFactory;
 import utility.DeliveryNames;
 import utility.Pages;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,7 +18,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 
 @WebServlet(name = "paymentServlet", urlPatterns = "/payment")
 public class PaymentController extends HttpServlet {
@@ -27,6 +25,8 @@ public class PaymentController extends HttpServlet {
     private HttpSession session = null;
     private User user = null;
     private boolean isPaid;
+    final static Logger logger =
+            org.apache.log4j.Logger.getLogger(PaymentController.class);
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -41,8 +41,7 @@ public class PaymentController extends HttpServlet {
             req.setAttribute("invoice", invoice);
 
         } catch (NumberFormatException e) {
-            System.out.println(e.getMessage());
-            // todo
+            logger.info("Incorrect user input");
         }
         session = req.getSession();
         redirect(req, resp);
@@ -63,8 +62,7 @@ public class PaymentController extends HttpServlet {
             session.setAttribute("updateInvoices", true);
 
         } catch (NumberFormatException e) {
-            System.out.println(e.getMessage());
-            // todo
+            logger.info("Incorrect user input");
         }
 
         redirect(req, resp);

@@ -5,6 +5,7 @@ import service.delivery.ServiceUser;
 import service.factory.DeliveryServiceFactory;
 import utility.DeliveryNames;
 import utility.Pages;
+import utility.tools.SecurityPassword;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,7 +16,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.HashSet;
 
-@WebServlet (name = "loginServlet", urlPatterns = "/login")
+@WebServlet(name = "loginServlet", urlPatterns = "/login")
 public class LoginController extends HttpServlet {
 
     private HttpSession session = null;
@@ -38,12 +39,15 @@ public class LoginController extends HttpServlet {
             String login = req.getParameter("login");
             User userExist = login != null ? service.getUser(login) : null;
 
-            if (userExist != null && req.getParameter("password").equals(userExist.getPassword())) {
-                if (isUserLogIn(login)) {
-                    user = userExist;
-                    session.setAttribute("user", user);
-                } else {
-                    req.setAttribute("logInError", true);
+            if (userExist != null) {
+                String inputPass = req.getParameter("password");
+                if (SecurityPassword.checkPassword(inputPass, login, userExist.getPassword())) {
+                    if (isUserLogIn(login)) {
+                        user = userExist;
+                        session.setAttribute("user", user);
+                    } else {
+                        req.setAttribute("logInError", true);
+                    }
                 }
             } else {
                 req.setAttribute("authorizationError", true);
@@ -67,12 +71,12 @@ public class LoginController extends HttpServlet {
             resp.sendRedirect("/cabinet");
         } else {
             getServletContext().getRequestDispatcher(Pages.LOGIN_JSP.getUrl()).forward(req, resp);
+            System.out.println(getServletContext().getContextPath());
         }
 
     }
 
     private boolean isUserLogIn(String userLogin) {
-        //HashSet<String> users = (HashSet<String>) getServletContext().getAttribute("usersPool");
         return ((HashSet<String>) getServletContext().getAttribute("usersPool")).add(userLogin);
     }
 

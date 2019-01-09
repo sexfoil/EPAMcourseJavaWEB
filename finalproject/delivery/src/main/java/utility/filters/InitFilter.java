@@ -11,6 +11,7 @@ import service.delivery.ServiceStreet;
 import service.factory.DeliveryServiceFactory;
 import utility.DeliveryNames;
 import utility.tools.LanguageManager;
+import utility.tools.SecurityPassword;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -64,7 +65,11 @@ public class InitFilter implements Filter {
             session.setAttribute("rowOnPage", getMaxRows());
 
             session.setAttribute("startSession", true);
-
+            SecurityPassword.getSecurePassword("sly", "sly");
+            SecurityPassword.getSecurePassword("vano", "vano");
+            SecurityPassword.getSecurePassword("olly", "olly");
+            SecurityPassword.getSecurePassword("pety", "pety");
+            SecurityPassword.getSecurePassword("test", "test");
         }
 
     }

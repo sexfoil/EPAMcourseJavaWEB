@@ -45,7 +45,7 @@
                                             <c:forEach var="type" items="${sessionScope.cargoTypes}">
                                                 <c:if test="${entry.value.weight <= type.maxWeight
                                                      && entry.value.weight >= type.minWeight}">
-                                                        <h5>${type.type}</h5>
+                                                        <h5><fmt:message key="${type.type}"/></h5>
                                                 </c:if>
                                             </c:forEach>
 
@@ -62,7 +62,7 @@
                                 <td>
                                     <c:forEach var="status" items="${sessionScope.deliveryStatuses}">
                                         <c:if test="${status.id == requestScope.invoice.statusId}">
-                                            <h5>${status.statusName}</h5>
+                                            <h5><fmt:message key="${status.statusName}"/></h5>
                                         </c:if>
                                     </c:forEach>
                                 </td>

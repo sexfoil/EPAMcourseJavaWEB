@@ -115,7 +115,7 @@ public class CabinetHistoryController extends HttpServlet {
         ServiceInvoice service = getServiceInvoice();
         List<Invoice> invoices = service.getAllUserInvoices(user.getId());
         LocalDateTime now = LocalDateTime.now();
-        invoices.stream().filter(invoice -> now.isAfter(invoice.getDateTime()) && invoice.getStatusId() == 2)
+        invoices.stream().filter(invoice -> (now.isAfter(invoice.getDateTime()) && invoice.getStatusId() == 2))
                 .forEach(invoice -> service.updateStatus(invoice.getId(), 3));
 
     }

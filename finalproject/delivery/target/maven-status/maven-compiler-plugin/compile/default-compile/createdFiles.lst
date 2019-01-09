@@ -2,6 +2,7 @@ controller\HomeController.class
 service\delivery\ServiceInvoice.class
 model\entity\Invoice.class
 model\database\dao\mysql\delivery\InvoiceDao.class
+utility\tools\SecurityPassword.class
 utility\Pages.class
 service\delivery\ServiceStreet.class
 model\database\dao\Dao.class

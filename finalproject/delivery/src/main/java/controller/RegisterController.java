@@ -7,6 +7,7 @@ import service.delivery.ServiceUserData;
 import service.factory.DeliveryServiceFactory;
 import utility.DeliveryNames;
 import utility.Pages;
+import utility.tools.SecurityPassword;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -55,7 +56,7 @@ public class RegisterController extends HttpServlet {
 
     private boolean validateFormParams(List<String> params) {
         boolean isOk = true;
-
+        isOk = params.get(3).equals(params.get(4));
         return isOk;
     }
 
@@ -83,11 +84,12 @@ public class RegisterController extends HttpServlet {
         ServiceUser service = (ServiceUser) DeliveryServiceFactory.getInstance()
                 .getService(DeliveryNames.USERS);
         params.remove(4);
+        String pass = params.get(3);
         boolean successfulUserAdded = service.addUser(
                 params.remove(0),
                 params.remove(0),
                 params.remove(0),
-                params.remove(0),
+                SecurityPassword.getSecurePassword(params.remove(0), login),
                 params.remove(0),
                 params.remove(0),
                 Integer.parseInt(params.remove(0))

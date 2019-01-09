@@ -23,6 +23,7 @@ public class ConnectionPoolMysqlDelivery {
                     bds.setUrl(resource.getString("url"));
                     bds.setUsername(resource.getString("user"));
                     bds.setPassword(resource.getString("password"));
+                    bds.setConnectionProperties(resource.getString("characterEncoding") + ";useUnicode=yes;");
                     bds.setMaxActive(Integer.valueOf(resource.getString("maxActive")));
                     bds.setMinIdle(Integer.valueOf(resource.getString("minIdle")));
                     bds.setMaxIdle(Integer.valueOf(resource.getString("maxIdle")));

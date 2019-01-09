@@ -1,6 +1,5 @@
 package controller;
 
-import model.entity.user.User;
 import utility.Pages;
 
 import javax.servlet.ServletException;
@@ -19,11 +18,8 @@ public class InfoPricesController extends HttpServlet {
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        // TODO
-
         session = req.getSession();
 
-        //session.setAttribute("infoPage", "SESSION INFO ATTRIBUTE PRICES");
         req.setAttribute("pricesPage", true);
 
         getServletContext().getRequestDispatcher(Pages.INFO_JSP.getUrl()).forward(req, resp);
