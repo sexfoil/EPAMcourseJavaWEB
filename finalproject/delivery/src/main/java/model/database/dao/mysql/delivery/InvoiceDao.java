@@ -14,15 +14,33 @@ public class InvoiceDao extends AbstractDAO {
         super(connection);
     }
 
+
+    public void updateInvoiceStatus(int id, int statusId) {
+        String query = buildUpdateInvoiceQuery(id, statusId);
+        executeUpdate(query);
+    }
+
+
     public void addInvoice(Invoice invoice) {
         String query = buildInsertInvoiceQuery(invoice);
+        executeUpdate(query);
+    }
+
+    public Invoice getInvoiceById(int id) {
+        String query = "select * from invoices where id=" + id + ";";
         try (Statement statement = connection.createStatement()) {
-            statement.executeUpdate(query);
+            ResultSet resultSet = statement.executeQuery(query);
+
+            if (resultSet.next()) {
+                return getInvoice(resultSet);
+            }
+
         } catch (SQLException e) {
-            // TODO
+            //TODO
             e.printStackTrace();
         }
 
+        return null;
     }
 
     public List<Invoice> getAllUserInvoices(int userId) {
@@ -76,6 +94,16 @@ public class InvoiceDao extends AbstractDAO {
 
     }
 
+    private void executeUpdate(String query) {
+        try (Statement statement = connection.createStatement()) {
+            statement.executeUpdate(query);
+        } catch (SQLException e) {
+            // TODO
+            e.printStackTrace();
+        }
+    }
+
+
     private String buildInsertInvoiceQuery(Invoice invoice) {
 
         StringBuilder query = new StringBuilder("insert into invoices ");
@@ -88,6 +116,17 @@ public class InvoiceDao extends AbstractDAO {
 
         System.out.println(query.toString());
         return query.toString();
+    }
+
+    private String buildUpdateInvoiceQuery(int id, int statusId) {
+
+        StringBuilder query = new StringBuilder("update invoices set ");
+        query.append("status_id=").append(statusId).append(" where ");
+        query.append("id=").append(id).append(";");
+
+        System.out.println(query.toString());
+        return query.toString();
+
     }
 
 

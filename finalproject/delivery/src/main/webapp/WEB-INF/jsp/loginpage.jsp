@@ -48,7 +48,7 @@
                     <br>
                     <input type="password" name="password" placeholder="enter password"/>
                     <br>
-                    <input type="image" src="../../img/menu/login_small.png"/>
+                    <input type="image" src="../../img/menu/login.png"/>
                 </form>
             </div>
         </div>

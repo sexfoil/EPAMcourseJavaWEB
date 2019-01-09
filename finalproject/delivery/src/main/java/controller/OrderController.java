@@ -28,10 +28,13 @@ import java.util.List;
 @WebServlet (name = "orderServlet", urlPatterns = "/order")
 public class OrderController extends HttpServlet {
 
-    HttpSession session = null;
-    User user = null;
+    private HttpSession session = null;
+    private User user = null;
+    private boolean isInvoiceCreated;
+
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
 
         initParameters(req);
         redirect(req, resp);
@@ -96,6 +99,7 @@ public class OrderController extends HttpServlet {
 
             updateUserDataInSession();
 
+            isInvoiceCreated = true;
         }
 
     }
@@ -122,6 +126,7 @@ public class OrderController extends HttpServlet {
     private void initParameters(HttpServletRequest request) {
         session = request.getSession();
         user = (User) session.getAttribute("user");
+        isInvoiceCreated = false;
     }
 
 
@@ -137,8 +142,11 @@ public class OrderController extends HttpServlet {
         if (user == null) {
             resp.sendRedirect("/login");
         } else {
-            //updateUserDataInSession(user.getId());
-            getServletContext().getRequestDispatcher(Pages.ORDER_JSP.getUrl()).forward(req, resp);
+            if (isInvoiceCreated) {
+                resp.sendRedirect("/cabinet_history");
+            } else {
+                getServletContext().getRequestDispatcher(Pages.ORDER_JSP.getUrl()).forward(req, resp);
+            }
         }
 
     }

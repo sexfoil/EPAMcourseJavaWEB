@@ -15,6 +15,10 @@ public class ServiceCargo extends AbstractService {
         dao = (CargoDao) abstractDAO;
     }
 
+    public Cargo getCargoById(long id) {
+        return dao.getCargoById(id);
+    }
+
     public void addCargo(Cargo cargo) {
         dao.addCargo(cargo);
     }

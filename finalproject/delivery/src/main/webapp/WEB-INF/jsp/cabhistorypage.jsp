@@ -19,13 +19,13 @@
                                 <td width="5%">
                                     NUMBER
                                 </td>
-                                <td width="35%">
+                                <td width="25%">
                                     CARGO
                                 </td>
                                 <td width="10%">
                                     COST
                                 </td>
-                                <td width="20%">
+                                <td width="30%">
                                     DATE
                                 </td>
                                 <td width="15%">
@@ -43,7 +43,18 @@
                                         <h5>${invoice.id}</h5>
                                     </td>
                                     <td>
-                                        <h5>${invoice.cargoId}</h5>
+                                        <!-- !!!!!!!!!!!!!!!   -->
+                                        <c:forEach var="entry" items="${requestScope.cargoes}">
+                                            <c:if test="${entry.key == invoice.cargoId}">
+                                                <c:forEach var="type" items="${sessionScope.cargoTypes}">
+                                                    <c:if test="${entry.value.weight <= type.maxWeight
+                                                     && entry.value.weight >= type.minWeight}">
+                                                                <h5>${type.type}</h5>
+                                                    </c:if>
+                                                </c:forEach>
+                                                                <h5>(${entry.value.weight / 1000} kg)</h5>
+                                            </c:if>
+                                        </c:forEach>
                                     </td>
                                     <td>
                                         <h5>${invoice.cost*0.01}</h5>
@@ -52,12 +63,19 @@
                                         <h5>${invoice.dateTime}</h5>
                                     </td>
                                     <td>
-                                        <h5>${invoice.statusId}</h5>
+                                        <c:forEach var="status" items="${sessionScope.deliveryStatuses}">
+                                            <c:if test="${status.id == invoice.statusId}">
+                                                <h5>${status.statusName}</h5>
+                                            </c:if>
+                                        </c:forEach>
                                     </td>
                                     <td>
-                                        <a href="?do=nothing" role="button" class="btn btn-primary pull-center">
-                                            DO SOMETHING
-                                        </a>
+                                        <c:if test="${invoice.statusId == 1}">
+                                            <a href="/payment?invoice=${invoice.id}"
+                                               role="button" class="btn btn-primary pull-center">
+                                                PAY
+                                            </a>
+                                        </c:if>
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -69,17 +87,20 @@
                             <a href="?page=1" role="button" class="btn btn-primary pull-center">
                                 FIRST
                             </a>
-                            <a href="?page=${requestScope.pageNum - 1}" role="button" class="btn btn-primary pull-center">
+                            <a href="?page=${requestScope.pageNum - 1}" role="button"
+                               class="btn btn-primary pull-center">
                                 <fmt:message key="PAGE_PREV"/>
                             </a>
                         </c:if>
                         <c:if test="${requestScope.pageNum - 2 > 0}">
-                            <a href="?page=${requestScope.pageNum - 2}" role="button" class="btn btn-primary pull-center">
+                            <a href="?page=${requestScope.pageNum - 2}" role="button"
+                               class="btn btn-primary pull-center">
                                     ${requestScope.pageNum - 2}
                             </a>
                         </c:if>
                         <c:if test="${requestScope.pageNum - 1 > 0}">
-                            <a href="?page=${requestScope.pageNum - 1}" role="button" class="btn btn-primary pull-center">
+                            <a href="?page=${requestScope.pageNum - 1}" role="button"
+                               class="btn btn-primary pull-center">
                                     ${requestScope.pageNum - 1}
                             </a>
                         </c:if>
@@ -89,17 +110,20 @@
                             </p>
                         </c:if>
                         <c:if test="${requestScope.pageNum + 1 <= requestScope.lastPage}">
-                            <a href="?page=${requestScope.pageNum + 1}" role="button" class="btn btn-primary pull-center">
+                            <a href="?page=${requestScope.pageNum + 1}" role="button"
+                               class="btn btn-primary pull-center">
                                     ${requestScope.pageNum + 1}
                             </a>
                         </c:if>
                         <c:if test="${requestScope.pageNum + 2 <= requestScope.lastPage}">
-                            <a href="?page=${requestScope.pageNum + 2}" role="button" class="btn btn-primary pull-center">
+                            <a href="?page=${requestScope.pageNum + 2}" role="button"
+                               class="btn btn-primary pull-center">
                                     ${requestScope.pageNum + 2}
                             </a>
                         </c:if>
                         <c:if test="${requestScope.pageNum < requestScope.lastPage}">
-                            <a href="?page=${requestScope.pageNum + 1}" role="button" class="btn btn-primary pull-center">
+                            <a href="?page=${requestScope.pageNum + 1}" role="button"
+                               class="btn btn-primary pull-center">
                                 <fmt:message key="PAGE_NEXT"/>
                             </a>
                             <a href="?page=${requestScope.lastPage}" role="button" class="btn btn-primary pull-center">

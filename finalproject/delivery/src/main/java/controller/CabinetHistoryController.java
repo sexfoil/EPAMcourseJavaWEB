@@ -1,7 +1,9 @@
 package controller;
 
+import model.entity.Cargo;
 import model.entity.Invoice;
 import model.entity.user.User;
+import service.delivery.ServiceCargo;
 import service.delivery.ServiceInvoice;
 import service.factory.DeliveryServiceFactory;
 import utility.DeliveryNames;
@@ -14,7 +16,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @WebServlet(name = "cabinetHistoryServlet", urlPatterns = "/cabinet_history")
@@ -26,9 +30,11 @@ public class CabinetHistoryController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         initParameters(req);
-        List<Invoice> invoices = getUserInvoices();
-        //req.setAttribute("userInvoices", invoices);
+        List<Invoice> invoices = getServiceInvoice().getAllUserInvoices(user.getId());
+        HashMap<Long, Cargo> cargoes = getInvoicesCargoes(invoices);
+        updateInvoicesStatus();
         setCurrentPageInvoices(req, invoices);
+        req.setAttribute("cargoes", cargoes);
         req.setAttribute("ordersPage", true);
         redirect(req, resp, user);
 
@@ -56,10 +62,21 @@ public class CabinetHistoryController extends HttpServlet {
 
     }
 
-    private List<Invoice> getUserInvoices() {
-        ServiceInvoice serviceInvoice = (ServiceInvoice) DeliveryServiceFactory.getInstance()
-                .getService(DeliveryNames.INVOICES);
-        return serviceInvoice.getAllUserInvoices(user.getId());
+    private ServiceInvoice getServiceInvoice() {
+        return (ServiceInvoice) DeliveryServiceFactory.getInstance().getService(DeliveryNames.INVOICES);
+    }
+
+    private ServiceCargo getServiceCargo() {
+        return (ServiceCargo) DeliveryServiceFactory.getInstance().getService(DeliveryNames.CARGOES);
+    }
+
+    private HashMap<Long, Cargo> getInvoicesCargoes(List<Invoice> invoices) {
+        ServiceCargo serviceCargo = getServiceCargo();
+        HashMap<Long, Cargo> cargoes = new HashMap<>();
+        for (Invoice invoice : invoices) {
+            cargoes.put(invoice.getCargoId(), serviceCargo.getCargoById(invoice.getCargoId()));
+        }
+        return cargoes;
     }
 
     private void setCurrentPageInvoices(HttpServletRequest request, List<Invoice> invoices) {
@@ -94,5 +111,12 @@ public class CabinetHistoryController extends HttpServlet {
 
     }
 
+    private void updateInvoicesStatus() {
+        ServiceInvoice service = getServiceInvoice();
+        List<Invoice> invoices = service.getAllUserInvoices(user.getId());
+        LocalDateTime now = LocalDateTime.now();
+        invoices.stream().filter(invoice -> now.isAfter(invoice.getDateTime()) && invoice.getStatusId() == 2)
+                .forEach(invoice -> service.updateStatus(invoice.getId(), 3));
 
+    }
 }

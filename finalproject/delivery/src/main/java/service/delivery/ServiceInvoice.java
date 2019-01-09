@@ -30,4 +30,12 @@ public class ServiceInvoice extends AbstractService {
     public List<Invoice> getAllUserInvoices(int userId) {
         return dao.getAllUserInvoices(userId);
     }
+
+    public Invoice getInvoiceById(int id) {
+        return dao.getInvoiceById(id);
+    }
+
+    public void updateStatus(int id, int statusId) {
+        dao.updateInvoiceStatus(id, statusId);
+    }
 }
